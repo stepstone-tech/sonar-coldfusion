@@ -1,0 +1,22 @@
+# Maven
+target/
+
+# IntelliJ IDEA
+*.iws
+*.iml
+*.ipr
+.idea/
+
+# Eclipse
+.classpath
+.project
+.settings
+
+# ---- Windows
+# Windows image file caches
+Thumbs.db
+# Folder config file
+Desktop.ini
+
+# SonarQube
+.sonar/

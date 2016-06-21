@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.sonarsource.parent</groupId>
+        <artifactId>parent</artifactId>
+        <version>35</version>
+    </parent>
+
+    <groupId>com.stepstone.sonar.plugin</groupId>
+    <artifactId>cflint-sonar-bridge</artifactId>
+    <packaging>sonar-plugin</packaging>
+    <version>1.0-SNAPSHOT</version>
+
+    <name>SonarQube ColdFusion Plugin</name>
+    <description>Enables scanning of ColdFusion source files</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+
+        <sonar.version>4.5.2</sonar.version>
+        <sonar.pluginName>ColdFusion</sonar.pluginName>
+        <sonar.pluginClass>com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin</sonar.pluginClass>
+
+        <license.skip>true</license.skip>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.codehaus.sonar.sslr-squid-bridge</groupId>
+            <artifactId>sslr-squid-bridge</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.codehaus.sonar</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.15</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+</project>

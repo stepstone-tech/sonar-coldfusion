@@ -1,31 +1,21 @@
-CFLint-SonarQube Bridge
-=======================
+# Installation
+1. Execute ``mvn install`` in ``cflint-sonar-bridge`` to build module.
+1. Copy ``cflint-sonar-bridge\target\cflint-sonar-bridge-{version}.jar`` to ``sonarqube-5.5\extensions\plugins``.
+1. Start sonar.
+1. Open page http://localhost:9000/settings?category=coldfusion and set absolute path to ``CFlint.jar`` in field ``CFlint jar``.
+1. Done :-)
 
-Trigger and import CFLint code analysis to SonarQube
 
+# Parameters tuning
+If you see something like this in sonar logs:
 
-## Working with your repository
-
-#### I just want to clone this repository
-
-If you want to simply clone this empty repository then run this command in your terminal.
-```sh
-git clone ssh://git@stash.stepstone.com:7999/cus/cflint-sonar-bridge.git
 ```
-#### My code is ready to be pushed
-If you already have code ready to be pushed to this repository then run this in your terminal.
-```sh
-cd existing-project
-git init
-git add --all
-git commit -m "Initial Commit"
-git remote add origin ssh://git@stash.stepstone.com:7999/cus/cflint-sonar-bridge.git
-git push -u origin master
+2016.06.22 16:17:43 INFO  ce[o.s.s.c.t.CeWorkerCallableImpl] Execute task | project=ApplyNowModule | type=REPORT | id=AVV4eUIgcn4uboqEX1C3
+java.lang.OutOfMemoryError: GC overhead limit exceeded
+Dumping heap to java_pid8400.hprof ...
+Heap dump file created [565019912 bytes in 6.373 secs]
 ```
-#### My code is already tracked by Git
-If your code is already tracked by Git then set this repository as your "origin" to push to.
-```sh
-cd existing-project
-git remote set-url origin ssh://git@stash.stepstone.com:7999/cus/cflint-sonar-bridge.git
-git push -u origin master
-```
+
+You need to increase memory size in `sonarqube-5.5\conf\sonar.properties`:
+
+```sonar.ce.javaOpts=-Xmx2g -Xms128m -XX:MaxPermSize=160m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true```
