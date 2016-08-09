@@ -2,15 +2,10 @@ package com.stepstone.sonar.plugin.coldfusion;
 
 import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionProfileExporter;
 import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionSonarWayProfileImporter;
-import com.stepstone.sonar.plugin.coldfusion.rules.ColdFusionCommonRulesDecorator;
-import com.stepstone.sonar.plugin.coldfusion.rules.ColdFusionCommonRulesEngine;
 import com.stepstone.sonar.plugin.coldfusion.rules.ColdFusionSonarRulesDefinition;
+import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;
-import org.sonar.api.SonarPlugin;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Properties({
         @Property(
@@ -46,7 +41,7 @@ import java.util.List;
                 global = true
         ),
 })
-public class ColdFusionPlugin extends SonarPlugin {
+public class ColdFusionPlugin implements Plugin {
 
     public static final String LANGUAGE_KEY = "cf";
     public static final String LANGUAGE_NAME = "ColdFusion";
@@ -62,16 +57,14 @@ public class ColdFusionPlugin extends SonarPlugin {
     public static final String CFLINT_JAVA_OPTS = "sonar.cf.cflint.java.opts";
 
     @Override
-    public List getExtensions() {
-        return Arrays.asList(
+    public void define(Context context) {
+        context.addExtensions(
                 ColdFusion.class,
                 ColdFusionSensor.class,
                 ColdFusionSonarRulesDefinition.class,
                 ColdFusionSonarWayProfileImporter.class,
-                ColdFusionProfileExporter.class,
-                ColdFusionCommonRulesEngine.class,
-                ColdFusionCommonRulesDecorator.class
+                ColdFusionProfileExporter.class
         );
-    }
 
+    }
 }

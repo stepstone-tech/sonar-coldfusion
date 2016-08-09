@@ -5,12 +5,11 @@ import com.google.common.base.Throwables;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.IssueAttributes;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.LocationAttributes;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.component.ResourcePerspectives;
-import org.sonar.api.issue.Issuable;
+import org.sonar.api.batch.sensor.SensorContext;
+import org.sonar.api.batch.sensor.issue.NewIssue;
+import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
 
 import javax.xml.stream.XMLInputFactory;
@@ -23,14 +22,13 @@ import java.io.IOException;
 
 public class CFlintAnalysisResultImporter {
 
-    private final Logger log = LoggerFactory.getLogger(CFlintAnalysisResultImporter.class);
     private final FileSystem fs;
-    private final ResourcePerspectives perspectives;
+    private final SensorContext sensorContext;
     private XMLStreamReader stream;
 
-    public CFlintAnalysisResultImporter(FileSystem fs, ResourcePerspectives perspectives) {
+    public CFlintAnalysisResultImporter(FileSystem fs, SensorContext sensorContext) {
         this.fs = fs;
-        this.perspectives = perspectives;
+        this.sensorContext = sensorContext;
     }
 
     public void parse(File file) {
@@ -79,30 +77,28 @@ public class CFlintAnalysisResultImporter {
 
                     LocationAttributes locationAttributes = new LocationAttributes(stream);
                     InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(locationAttributes.getFile().get()));
-                    Preconditions.checkNotNull(inputFile);
-                    Issuable issuable = getIssuable(inputFile);
 
-                    Issuable.IssueBuilder builder = issuable.newIssueBuilder();
-
-                    builder.ruleKey(RuleKey.of(ColdFusionPlugin.REPOSITORY_KEY, issueAttributes.getId().get()));
-                    builder.line(locationAttributes.getLine().get());
-                    builder.message(locationAttributes.getMessage().get());
-
-                    issuable.addIssue(builder.build());
+                    createNewIssue(issueAttributes, locationAttributes, inputFile);
                 }
             }
         }
     }
 
-    private Issuable getIssuable(InputFile inputFile) {
-        try {
-            Issuable issuable = perspectives.as(Issuable.class, inputFile);
-            Preconditions.checkNotNull(issuable);
-            return issuable;
-        } catch (NullPointerException e) {
-            log.warn("File {} isn't in sonars repository", inputFile);
-            throw e;
-        }
+    private void createNewIssue(IssueAttributes issueAttributes, LocationAttributes locationAttributes, InputFile inputFile) {
+        Preconditions.checkNotNull(issueAttributes);
+        Preconditions.checkNotNull(locationAttributes);
+        Preconditions.checkNotNull(inputFile);
+
+        final NewIssue issue = sensorContext.newIssue();
+
+        final NewIssueLocation issueLocation = issue.newLocation();
+        issueLocation.on(inputFile);
+        issueLocation.at(inputFile.selectLine(locationAttributes.getLine().get()));
+        issueLocation.message(locationAttributes.getMessage().get());
+
+        issue.forRule(RuleKey.of(ColdFusionPlugin.REPOSITORY_KEY, issueAttributes.getId().get()));
+        issue.addLocation(issueLocation);
+        issue.save();
     }
 
     private void closeXmlStream() {

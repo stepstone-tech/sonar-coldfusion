@@ -1,20 +1,26 @@
 package com.stepstone.sonar.plugin.coldfusion.rules;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Preconditions;
-import com.google.common.collect.ImmutableSet;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import org.sonar.api.BatchExtension;
+import org.sonar.api.batch.BatchSide;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
 import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 import java.io.InputStreamReader;
-import java.util.Set;
 
-public class ColdFusionSonarRulesDefinition implements RulesDefinition, BatchExtension {
+import static java.nio.charset.StandardCharsets.UTF_8;
 
-    private Set<String> allRuleKeys = null;
+@BatchSide
+public class ColdFusionSonarRulesDefinition implements RulesDefinition {
+
+    private static final String DEFAULT_SQUALE_FILE = "/com/stepstone/sonar/plugin/coldfusion/sqale.xml";
+    private static final String DEFAULT_RULES_FILE = "/com/stepstone/sonar/plugin/coldfusion/rules.xml";
+
+    private final RulesDefinitionXmlLoader rulesLoader;
+
+    public ColdFusionSonarRulesDefinition(RulesDefinitionXmlLoader rulesLoader) {
+        this.rulesLoader = rulesLoader;
+    }
 
     @Override
     public void define(Context context) {
@@ -22,22 +28,9 @@ public class ColdFusionSonarRulesDefinition implements RulesDefinition, BatchExt
                 .createRepository(ColdFusionPlugin.REPOSITORY_KEY, ColdFusionPlugin.LANGUAGE_KEY)
                 .setName(ColdFusionPlugin.REPOSITORY_NAME);
 
-        RulesDefinitionXmlLoader loader = new RulesDefinitionXmlLoader();
-        loader.load(repository, new InputStreamReader(getClass().getResourceAsStream("/com/stepstone/sonar/plugin/coldfusion/rules.xml"), Charsets.UTF_8));
-        SqaleXmlLoader.load(repository, "/com/stepstone/sonar/plugin/coldfusion/sqale.xml");
-
-        ImmutableSet.Builder<String> builder = ImmutableSet.builder();
-        for (NewRule rule : repository.rules()) {
-            builder.add(rule.key());
-        }
-        allRuleKeys = builder.build();
+        rulesLoader.load(repository, new InputStreamReader(getClass().getResourceAsStream(DEFAULT_RULES_FILE), UTF_8));
+        SqaleXmlLoader.load(repository, DEFAULT_SQUALE_FILE);
 
         repository.done();
     }
-
-    public Set<String> allRuleKeys() {
-        Preconditions.checkNotNull(allRuleKeys);
-        return allRuleKeys;
-    }
-
 }
