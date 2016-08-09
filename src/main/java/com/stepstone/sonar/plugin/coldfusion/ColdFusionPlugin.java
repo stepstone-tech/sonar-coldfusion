@@ -17,14 +17,6 @@ import org.sonar.api.Property;
                 global = true
         ),
         @Property(
-                key = ColdFusionPlugin.CFLINT_JAR_PATH,
-                defaultValue = "CFLint-all.jar",
-                name = "CFlint jar",
-                description = "Absolute path to CFLint jar file",
-                project = true,
-                global = true
-        ),
-        @Property(
                 key = ColdFusionPlugin.CFLINT_JAVA,
                 defaultValue = "java",
                 name = "Java executable",
@@ -52,7 +44,6 @@ public class ColdFusionPlugin implements Plugin {
     public static final String REPOSITORY_KEY = "coldfusionsquid";
     public static final String REPOSITORY_NAME = "SonarQube";
 
-    public static final String CFLINT_JAR_PATH = "sonar.cf.cflint.jar.path";
     public static final String CFLINT_JAVA = "sonar.cf.cflint.java";
     public static final String CFLINT_JAVA_OPTS = "sonar.cf.cflint.java.opts";
 
