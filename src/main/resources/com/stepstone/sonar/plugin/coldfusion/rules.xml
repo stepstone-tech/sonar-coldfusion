@@ -3,569 +3,528 @@
     <rule>
         <key>ARG_DEFAULT_MISSING</key>
         <name>Optional argument is missing a default value.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>ARG_VAR_CONFLICT</key>
         <name>Variable declared in both var and argument scopes.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>ARG_VAR_MIXED</key>
         <name>Variable referenced in local and argument scopes.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>NO_DEFAULT_INSIDE_SWITCH</key>
         <name>Missing default switch statement.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        
     </rule>
     <rule>
         <key>GLOBAL_VAR</key>
         <name>Global variable exists.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>NESTED_CFOUTPUT</key>
         <name>Nested cfoutput with cfquery tag.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        
     </rule>
     <rule>
         <key>OUTPUT_ATTR</key>
         <name>Tag should have output='false'.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        
     </rule>
     <rule>
         <key>QUERYPARAM_REQ</key>
         <name>SetSql() statement should use .addParam().</name>
-        <severity>INFO</severity>
+        <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>CFQUERYPARAM_REQ</key>
         <name>cfquery should use</name>
-        <severity>INFO</severity>
+        <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>QUERYNEW_DATATYPE</key>
         <name>QueryNew statement should specify datatypes.</name>
-        <severity>INFO</severity>
+        <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>MISSING_VAR</key>
         <name>Variable is not declared with a var statement.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFDUMP_TAG</key>
         <name>Avoid use of cfdump tags.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFEXECUTE_TAG</key>
         <name>Avoid use of cfexecute tags.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFABORT_TAG</key>
         <name>Avoid use of cfabort tags.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_ABORT</key>
         <name>Avoid use of abort statements.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFINSERT_TAG</key>
         <name>Avoid use of cfinsert tags.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFMODULE_TAG</key>
         <name>Avoid use of cfmodule tags.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFUPDATE_TAG</key>
         <name>Avoid use of cfupdate tags.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFINCLUDE_TAG</key>
         <name>Avoid use of cfinclude tags.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+
     </rule>
     <rule>
         <key>COMPONENT_HINT_MISSING</key>
         <name>Component is missing a hint.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>FUNCTION_HINT_MISSING</key>
         <name>Function is missing a hint.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARG_HINT_MISSING</key>
         <name>Argument is missing a hint.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARG_TYPE_MISSING</key>
         <name>Component is missing a type.</name>
-        <severity>INFO</severity>
+        <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>ARG_TYPE_ANY</key>
         <name>Component is of type any.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>EXCESSIVE_FUNCTION_LENGTH</key>
         <name>Method is too long.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>EXCESSIVE_COMPONENT_LENGTH</key>
         <name>Component is too long.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>FUNCTION_TYPE_MISSING</key>
         <name>Function is missing a return type.</name>
-        <severity>INFO</severity>
+        <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>FUNCTION_TYPE_ANY</key>
         <name>Function has a return type of any.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>EXCESSIVE_ARGUMENTS</key>
         <name>Function has too many arguments.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>EXCESSIVE_FUNCTIONS</key>
         <name>Too many functions.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>FUNCTION_TOO_COMPLEX</key>
         <name>Function is too complex.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_WRITEDUMP</key>
         <name>Avoid use of writedump statements.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>AVOID_USING_STRUCTNEW</key>
         <name>Avoid use of structnew statements. Use {} instead.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_ISDEBUGMODE</key>
         <name>Avoid use of isdebugmode statements.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_ARRAYNEW</key>
         <name>Avoid use of arraynew statements. Use [] instead.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPLEX_BOOLEAN_CHECK</key>
         <name>Complex boolean expression.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>EXPLICIT_BOOLEAN_CHECK</key>
         <name>Checking boolean expression explicitly.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>VAR_INVALID_NAME</key>
         <name>Variable has invalid name.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>VAR_ALLCAPS_NAME</key>
         <name>Variable name is allcaps.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>VAR_TOO_SHORT</key>
         <name>Variable name is too short.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>VAR_TOO_LONG</key>
         <name>Variable name is too long.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>VAR_TOO_WORDY</key>
         <name>Variable name contain too many words.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>VAR_IS_TEMPORARY</key>
         <name>Variable name looks temporary.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>VAR_HAS_PREFIX_OR_POSTFIX</key>
         <name>Variable name has prefix or postfix.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_INVALID_NAME</key>
         <name>Argument has invalid name.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>ARGUMENT_ALLCAPS_NAME</key>
         <name>Argument name is allcaps.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_TOO_SHORT</key>
         <name>Argument name is too short.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_TOO_LONG</key>
         <name>Argument name is too long.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_TOO_WORDY</key>
         <name>Argument name contain too many words.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_IS_TEMPORARY</key>
         <name>Argument name looks temporary.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_HAS_PREFIX_OR_POSTFIX</key>
         <name>Argument name has prefix or postfix.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>METHOD_INVALID_NAME</key>
         <name>Method has invalid name.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>METHOD_ALLCAPS_NAME</key>
         <name>Method name is allcaps.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>METHOD_TOO_SHORT</key>
         <name>Method name is too short.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>METHOD_TOO_LONG</key>
         <name>Method name is too long.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>METHOD_TOO_WORDY</key>
         <name>Method name contain too many words.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>METHOD_IS_TEMPORARY</key>
         <name>Method name looks temporary.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>METHOD_HAS_PREFIX_OR_POSTFIX</key>
         <name>Method name has prefix or postfix.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_INVALID_NAME</key>
         <name>Component has invalid name.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>COMPONENT_ALLCAPS_NAME</key>
         <name>Component name is allcaps.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_TOO_SHORT</key>
         <name>Component name is too short.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_TOO_LONG</key>
         <name>Component name is too long.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_TOO_WORDY</key>
         <name>Component name contain too many words.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_IS_TEMPORARY</key>
         <name>Component name looks temporary.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_HAS_PREFIX_OR_POSTFIX</key>
         <name>Component name has prefix or postfix.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>FILE_SHOULD_START_WITH_LOWERCASE</key>
         <name>CFM File starts with upper case.</name>
-        <severity>INFO</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_CREATEOBJECT</key>
         <name>Avoid use of creatobject statements.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_DEBUG_ATTR</key>
         <name>Avoid use of debug attribute.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>UNUSED_LOCAL_VARIABLE</key>
         <name>Unused local variable.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>UNUSED_METHOD_ARGUMENT</key>
         <name>Unused method argument.</name>
-        <severity>INFO</severity>
+        <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>COMPARE_INSTEAD_OF_ASSIGN</key>
         <name>Using comparison where assignment was probably meant.</name>
-        <severity>INFO</severity>
+        <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -573,31 +532,30 @@
         <name>Unable to parse</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
         <key>SCOPE_ALLCAPS_NAME</key>
         <name>Variable scope name is allcaps.</name>
-        <severity>CRITICAL</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_CFSETTING_DEBUG</key>
         <name>Avoid using showDebugOutput attribute on cfsetting.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
-        <tag>bug</tag>
+        <description><![CDATA[  ]]></description>
+        <tag>security</tag>
     </rule>
     <rule>
         <key>MISSING_SEMI</key>
         <name>No semicolon!</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -605,7 +563,7 @@
         <name>PARSE NOTHING</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -613,7 +571,7 @@
         <name>PLUGIN_ERROR</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ TODO ]]></description>
+        <description><![CDATA[  ]]></description>
         <tag>bug</tag>
     </rule>
 </rules>
