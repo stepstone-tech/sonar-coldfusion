@@ -97,7 +97,7 @@ public class CFlintAnalysisResultImporter {
         issueLocation.message(locationAttributes.getMessage().get());
 
         issue.forRule(RuleKey.of(ColdFusionPlugin.REPOSITORY_KEY, issueAttributes.getId().get()));
-        issue.addLocation(issueLocation);
+        issue.at(issueLocation);
         issue.save();
     }
 
