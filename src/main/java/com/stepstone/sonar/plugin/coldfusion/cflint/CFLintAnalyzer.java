@@ -5,6 +5,7 @@ import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Settings;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
@@ -20,12 +21,11 @@ public class CFLintAnalyzer {
     private final Settings settings;
     private final FileSystem fs;
 
-    public CFLintAnalyzer(Settings settings, FileSystem fs) {
-        Preconditions.checkNotNull(settings);
-        Preconditions.checkNotNull(fs);
+    public CFLintAnalyzer(SensorContext sensorContext) {
+        Preconditions.checkNotNull(sensorContext);
 
-        this.settings = settings;
-        this.fs = fs;
+        this.settings = sensorContext.settings();
+        this.fs = sensorContext.fileSystem();
     }
 
     public void analyze(File configFile) throws IOException, XMLStreamException {
@@ -37,8 +37,8 @@ public class CFLintAnalyzer {
         command.addArgument("-jar")
                 .addArgument(extractCflintJar().getPath())
                 .addArgument("-xml")
-                .addArgument("-file")
-                .addArgument(fs.baseDir().getPath())
+                .addArgument("-folder")
+                .addArgument(settings.getString("sonar.sources"))
                 .addArgument("-xmlfile")
                 .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
                 .addArgument("-configfile")

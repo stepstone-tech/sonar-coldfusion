@@ -8,7 +8,6 @@ import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
-import org.sonar.api.config.Settings;
 import org.sonar.api.profiles.RulesProfile;
 
 import javax.xml.stream.XMLStreamException;
@@ -17,16 +16,13 @@ import java.io.IOException;
 
 public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
 
-    private final Settings settings;
     private final FileSystem fs;
     private final RulesProfile ruleProfile;
 
-    public ColdFusionSensor(Settings settings, FileSystem fs, RulesProfile ruleProfile) {
-        Preconditions.checkNotNull(settings);
+    public ColdFusionSensor(FileSystem fs, RulesProfile ruleProfile) {
         Preconditions.checkNotNull(fs);
         Preconditions.checkNotNull(ruleProfile);
 
-        this.settings = settings;
         this.fs = fs;
         this.ruleProfile = ruleProfile;
     }
@@ -41,15 +37,15 @@ public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
     @Override
     public void execute(SensorContext context) {
         try {
-            analyze();
+            analyze(context);
             importResults(context);
         } catch (IOException | XMLStreamException e) {
             Throwables.propagate(e);
         }
     }
 
-    protected void analyze() throws IOException, XMLStreamException {
-        new CFLintAnalyzer(settings, fs).analyze(generateCflintConfig());
+    protected void analyze(SensorContext context) throws IOException, XMLStreamException {
+        new CFLintAnalyzer(context).analyze(generateCflintConfig());
     }
 
     protected File generateCflintConfig() throws IOException, XMLStreamException {

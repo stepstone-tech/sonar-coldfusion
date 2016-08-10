@@ -36,14 +36,20 @@ public class CFLintExtractor {
 
     private File getFile() throws IOException {
         final File cflintJar = new File(workDir, CFLINT);
-        final File parentFile = cflintJar.getParentFile();
-        final boolean mkdirs = parentFile.mkdirs();
 
-        if (!mkdirs) {
-            throw new IOException("Cannot create directory: " + parentFile);
-        }
+        mkdirs(cflintJar.getParentFile());
 
         return cflintJar;
+    }
+
+    private void mkdirs(File directory) throws IOException {
+        if (!directory.exists()) {
+            final boolean mkdirs = directory.mkdirs();
+
+            if (!mkdirs) {
+                throw new IOException("Cannot create directory: " + directory);
+            }
+        }
     }
 
 }
