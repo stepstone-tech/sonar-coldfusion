@@ -1,11 +1,13 @@
 # SonarQube ColdFusion Plugin
 
+A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, based on the [CFLint library](https://github.com/cflint/CFLint).
+
 ## Installation
 
 1. Execute `mvn install` to build module.
 1. Copy `target/sonar-coldfusion-plugin-{version}.jar` to `<sonarqube dir>/extensions/plugins`.
 1. Restart SonarQube.
-1. Run sonar-scanner on your ColdFusion code.
+1. Run `sonar-scanner` on your ColdFusion code.
 
 ## Parameters tuning
 
