@@ -4,10 +4,13 @@ A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, b
 
 ## Installation
 
-1. Execute `mvn install` to build module.
-1. Copy `target/sonar-coldfusion-plugin-{version}.jar` to `<sonarqube dir>/extensions/plugins`.
+1. Download the JAR file from the [releases section](https://github.com/stepstone-tech/sonar-coldfusion/releases) or build it yourself by cloning the code and running `mvn install`.
+1. Copy `sonar-coldfusion-plugin-{version}.jar` to `<sonarqube dir>/extensions/plugins`.
 1. Restart SonarQube.
-1. Run `sonar-scanner` on your ColdFusion code.
+
+## Running
+
+Follow the instructions for [analyzing code with SonarQube Scanner](http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner). The ColdFusion plugin will automatically discover and analyze `.cfc` and `.cfm` files.
 
 ## Parameters tuning
 
