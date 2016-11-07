@@ -30,7 +30,6 @@
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
-        
     </rule>
     <rule>
         <key>GLOBAL_VAR</key>
@@ -46,7 +45,6 @@
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
-        
     </rule>
     <rule>
         <key>OUTPUT_ATTR</key>
@@ -54,7 +52,6 @@
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
-        
     </rule>
     <rule>
         <key>QUERYPARAM_REQ</key>
