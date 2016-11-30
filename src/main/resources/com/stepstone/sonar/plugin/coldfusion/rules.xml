@@ -30,7 +30,6 @@
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
-        
     </rule>
     <rule>
         <key>GLOBAL_VAR</key>
@@ -46,7 +45,6 @@
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
-        
     </rule>
     <rule>
         <key>OUTPUT_ATTR</key>
@@ -54,7 +52,6 @@
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
-        
     </rule>
     <rule>
         <key>QUERYPARAM_REQ</key>
@@ -172,6 +169,13 @@
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
+    </rule>
+    <rule>
+        <key>ARG_HINT_MISSING_SCRIPT</key>
+        <name>Argument is missing a hint.</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>Use JavaDoc style annotations on cfscript functions.</p> ]]></description>
     </rule>
     <rule>
         <key>ARG_TYPE_MISSING</key>
@@ -557,6 +561,13 @@
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
         <tag>bug</tag>
+    </rule>
+    <rule>
+        <key>UNQUOTED_STRUCT_KEY</key>
+        <name>Unquoted struct key</name>
+        <severity>MAJOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>Unquoted structure keys may or may not maintain their case on output. Quoting is recommended to make sure the case of the key is always the same.</p> ]]></description>
     </rule>
     <rule>
         <key>PARSE_NOTHING</key>

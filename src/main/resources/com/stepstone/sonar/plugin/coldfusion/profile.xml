@@ -93,6 +93,10 @@
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>ARG_HINT_MISSING_SCRIPT</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
             <key>ARG_TYPE_MISSING</key>
         </rule>
         <rule>
@@ -302,6 +306,10 @@
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
             <key>MISSING_SEMI</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>UNQUOTED_STRUCT_KEY</key>
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
