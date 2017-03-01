@@ -189,6 +189,10 @@
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>ARGUMENT_MISSING_NAME</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
             <key>ARGUMENT_INVALID_NAME</key>
         </rule>
         <rule>
@@ -310,6 +314,26 @@
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
             <key>UNQUOTED_STRUCT_KEY</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>SQL_SELECT_STAR</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>NEVER_USE_QUERY_IN_CFM</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>USE_DISPLAY_NAME</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>LOCAL_LITERAL_VALUE_USED_TOO_OFTEN</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>GLOBAL_LITERAL_VALUE_USED_TOO_OFTEN</key>
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
