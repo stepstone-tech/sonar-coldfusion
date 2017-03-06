@@ -14,7 +14,7 @@ Follow the instructions for [analyzing code with SonarQube Scanner](http://docs.
 
 ## Parameters tuning
 
-If you see something like this in SonarQube logs:
+If you encounter log output indicating, that the Compute Engine of SonarQube has insufficient memory, similar to:
 
 ```
 2016.06.22 16:17:43 INFO  ce[o.s.s.c.t.CeWorkerCallableImpl] Execute task | project=ApplyNowModule | type=REPORT | id=AVV4eUIgcn4uboqEX1C3
@@ -23,11 +23,13 @@ Dumping heap to java_pid8400.hprof ...
 Heap dump file created [565019912 bytes in 6.373 secs]
 ```
 
-You need to increase memory size in `<sonarqube dir>/conf/sonar.properties`:
+you'll need to increase heap memory on the server, in `<sonarqube dir>/conf/sonar.properties`:
 
 ```
-sonar.ce.javaOpts=-Xmx2g -Xms128m -XX:MaxPermSize=160m -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true
+sonar.ce.javaOpts=-Xmx2g -Xms128m -XX:+HeapDumpOnOutOfMemoryError
 ```
+
+2GB might be enough, or perhaps your code base warrants more.
 
 ## License
 
