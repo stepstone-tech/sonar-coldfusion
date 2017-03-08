@@ -10,6 +10,30 @@
 
     <name>SonarQube Coldfusion Analyzer</name>
     <description>Enables scanning of ColdFusion source files</description>
+    <url>https://github.com/stepstone-tech/sonar-coldfusion</url>
+
+    <organization>
+        <name>StepStone GmbH</name>
+        <url>http://www.stepstone.com/</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <connection>git@github.com:stepstone-tech/sonar-coldfusion.git</connection>
+        <developerConnection>git@github.com:stepstone-tech/sonar-coldfusion.git</developerConnection>
+        <url>https://github.com/stepstone-tech/sonar-coldfusion</url>
+        <tag>HEAD</tag>
+    </scm>
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/stepstone-tech/sonar-coldfusion/issues</url>
+    </issueManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
