@@ -11,8 +11,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <txt/>
-                    <val>15min</val>
+                    <val>15</val>
+                    <txt>min</txt>
                 </prop>
             </chc>
         </chc>
@@ -26,8 +26,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <txt/>
-                    <val>2min</val>
+                    <val>2</val>
+                    <txt>min</txt>
                 </prop>
             </chc>
         </chc>
@@ -41,8 +41,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <txt/>
-                    <val>15min</val>
+                    <val>15</val>
+                    <txt>min</txt>
                 </prop>
             </chc>
         </chc>
