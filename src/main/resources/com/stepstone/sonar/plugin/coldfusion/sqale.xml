@@ -23,7 +23,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -35,7 +35,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -59,8 +59,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
-                    <txt>min</txt>
+                    <val>1</val>
+                    <txt>h</txt>
                 </prop>
             </chc>
             <chc>
@@ -71,8 +71,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
-                    <txt>min</txt>
+                    <val>1</val>
+                    <txt>h</txt>
                 </prop>
             </chc>
             <chc>
@@ -83,7 +83,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -95,7 +95,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -107,7 +107,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -119,7 +119,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -131,7 +131,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -143,7 +143,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>2</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -155,7 +155,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -167,7 +167,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -179,7 +179,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -191,7 +191,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -203,7 +203,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -215,7 +215,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -227,7 +227,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -239,7 +239,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>20</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -251,7 +251,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -263,7 +263,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -275,7 +275,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -287,7 +287,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -299,7 +299,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -311,7 +311,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>45</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -323,8 +323,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
-                    <txt>min</txt>
+                    <val>1</val>
+                    <txt>h</txt>
                 </prop>
             </chc>
             <chc>
@@ -335,7 +335,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -347,7 +347,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -371,7 +371,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -383,8 +383,8 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
-                    <txt>min</txt>
+                    <val>1</val>
+                    <txt>h</txt>
                 </prop>
             </chc>
             <chc>
@@ -395,7 +395,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -407,7 +407,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -419,7 +419,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -431,7 +431,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -443,7 +443,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -455,7 +455,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -467,7 +467,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -479,7 +479,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -491,7 +491,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -503,7 +503,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -515,7 +515,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -527,7 +527,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -539,7 +539,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -551,7 +551,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -563,7 +563,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -575,7 +575,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -587,7 +587,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -599,7 +599,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -611,7 +611,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -623,7 +623,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -635,7 +635,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -647,7 +647,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -659,7 +659,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -671,7 +671,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -695,7 +695,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -707,7 +707,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -719,7 +719,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -731,7 +731,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -743,7 +743,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -755,7 +755,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -767,7 +767,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -779,7 +779,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -791,7 +791,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>30</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -803,7 +803,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -815,7 +815,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -827,7 +827,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -839,7 +839,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -851,7 +851,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -863,19 +863,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
-                    <txt>min</txt>
-                </prop>
-            </chc>
-            <chc>
-                <rule-key>PARSE_ERROR</rule-key>
-                <prop>
-                    <key>remediationFunction</key>
-                    <txt>CONSTANT_ISSUE</txt>
-                </prop>
-                <prop>
-                    <key>offset</key>
-                    <val>15</val>
+                    <val>10</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -887,7 +875,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -899,7 +887,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -911,7 +899,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
@@ -923,7 +911,7 @@
                 </prop>
                 <prop>
                     <key>offset</key>
-                    <val>15</val>
+                    <val>5</val>
                     <txt>min</txt>
                 </prop>
             </chc>
