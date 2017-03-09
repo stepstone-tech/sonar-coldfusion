@@ -15,9 +15,6 @@
                     <txt>min</txt>
                 </prop>
             </chc>
-        </chc>
-        <chc>
-            <key>DATA_RELIABILITY</key>
             <chc>
                 <rule-key>FUNCTION_HINT_MISSING</rule-key>
                 <prop>
@@ -30,9 +27,6 @@
                     <txt>min</txt>
                 </prop>
             </chc>
-        </chc>
-        <chc>
-            <key>INSTRUCTION_RELIABILITY</key>
             <chc>
                 <rule-key>OUTPUT_ATTR</rule-key>
                 <prop>
