@@ -338,6 +338,13 @@
         <description><![CDATA[ <p></p> ]]></description>
     </rule>
     <rule>
+        <key>ARGUMENT_MISSING_NAME</key>
+        <name>Argument is missing a name.</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p></p> ]]></description>
+    </rule>
+    <rule>
         <key>ARGUMENT_INVALID_NAME</key>
         <name>Argument has invalid name.</name>
         <severity>CRITICAL</severity>
@@ -568,6 +575,41 @@
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p>Unquoted structure keys may or may not maintain their case on output. Quoting is recommended to make sure the case of the key is always the same.</p> ]]></description>
+    </rule>
+    <rule>
+        <key>SQL_SELECT_STAR</key>
+        <name>Star in SQL SELECT</name>
+        <severity>MAJOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>Avoid using <code>SELECT *</code> in a query.</p> ]]></description>
+    </rule>
+    <rule>
+        <key>NEVER_USE_QUERY_IN_CFM</key>
+        <name>Never use CFQUERY in .cfm files</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>Don't use <code>&lt;cfquery&gt;</code> in <code>.cfm</code> files. Database should not be coupled with view.</p> ]]></description>
+    </rule>
+    <rule>
+        <key>USE_DISPLAY_NAME</key>
+        <name>Use displayName instead of name</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>The component has a <code>name</code> attribute perhaps you meant to use <code>displayName</code>?</p> ]]></description>
+    </rule>
+    <rule>
+        <key>LOCAL_LITERAL_VALUE_USED_TOO_OFTEN</key>
+        <name>Local literal value used too often</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>The literal occurs several times in the same file. Consider giving it a name and not hard coding values.</p> ]]></description>
+    </rule>
+    <rule>
+        <key>GLOBAL_LITERAL_VALUE_USED_TOO_OFTEN</key>
+        <name>Global literal value used too often</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>The literal occurs several times in one or more files. Consider giving it a name and not hard coding values.</p> ]]></description>
     </rule>
     <rule>
         <key>PARSE_NOTHING</key>
