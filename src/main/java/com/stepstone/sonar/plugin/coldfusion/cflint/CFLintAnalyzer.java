@@ -18,14 +18,14 @@ package com.stepstone.sonar.plugin.coldfusion.cflint;
 
 import com.google.common.base.Preconditions;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Settings;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -33,7 +33,7 @@ import java.io.IOException;
 
 public class CFLintAnalyzer {
 
-    private final Logger log = LoggerFactory.getLogger(CFLintAnalyzer.class);
+    private final Logger LOGGER = Loggers.get(CFLintAnalyzer.class);
     private final Settings settings;
     private final FileSystem fs;
 
@@ -85,7 +85,7 @@ public class CFLintAnalyzer {
 
         @Override
         public void consumeLine(String line) {
-            log.info(line);
+            LOGGER.info(line);
         }
 
     }
@@ -94,7 +94,7 @@ public class CFLintAnalyzer {
 
         @Override
         public void consumeLine(String line) {
-            log.error(line);
+            LOGGER.error(line);
         }
 
     }
