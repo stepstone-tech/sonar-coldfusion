@@ -57,6 +57,10 @@
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>AVOID_USING_ISDATE</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
             <key>AVOID_USING_CFABORT_TAG</key>
         </rule>
         <rule>
@@ -337,11 +341,19 @@
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>PACKAGE_CASE_MISMATCH</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
             <key>PARSE_NOTHING</key>
         </rule>
         <rule>
             <repositoryKey>coldfusionsquid</repositoryKey>
             <key>PLUGIN_ERROR</key>
+        </rule>
+        <rule>
+            <repositoryKey>coldfusionsquid</repositoryKey>
+            <key>AVOID_EMPTY_FILES</key>
         </rule>
     </rules>
 </profile>
