@@ -102,6 +102,14 @@
         <tag>security</tag>
     </rule>
     <rule>
+        <key>AVOID_USING_ISDATE</key>
+        <name>Avoid use of isDate()</name>
+        <severity>MAJOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>Avoid using the <code>isDate()</code> built-in function. It is too permissive. Use <code>isValid()</code> instead.</p> ]]></description>
+        <tag>security</tag>
+    </rule>
+    <rule>
         <key>AVOID_USING_CFABORT_TAG</key>
         <name>Avoid use of cfabort tags.</name>
         <severity>CRITICAL</severity>
@@ -612,6 +620,13 @@
         <description><![CDATA[ <p>The literal occurs several times in one or more files. Consider giving it a name and not hard coding values.</p> ]]></description>
     </rule>
     <rule>
+        <key>PACKAGE_CASE_MISMATCH</key>
+        <name>Package name case mismatch</name>
+        <severity>MINOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>The case of the package folder and the object declaration do not match.</p> ]]></description>
+    </rule>
+    <rule>
         <key>PARSE_NOTHING</key>
         <name>PARSE NOTHING</name>
         <severity>CRITICAL</severity>
@@ -623,6 +638,14 @@
         <key>PLUGIN_ERROR</key>
         <name>PLUGIN_ERROR</name>
         <severity>CRITICAL</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p></p> ]]></description>
+        <tag>bug</tag>
+    </rule>
+    <rule>
+        <key>AVOID_EMPTY_FILES</key>
+        <name>AVOID_EMPTY_FILES</name>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
         <tag>bug</tag>

@@ -160,6 +160,18 @@
                 </prop>
             </chc>
             <chc>
+                <rule-key>AVOID_USING_ISDATE</rule-key>
+                <prop>
+                    <key>remediationFunction</key>
+                    <txt>CONSTANT_ISSUE</txt>
+                </prop>
+                <prop>
+                    <key>offset</key>
+                    <val>5</val>
+                    <txt>min</txt>
+                </prop>
+            </chc>
+            <chc>
                 <rule-key>AVOID_USING_CFABORT_TAG</rule-key>
                 <prop>
                     <key>remediationFunction</key>
@@ -905,6 +917,18 @@
             </chc>
             <chc>
                 <rule-key>UNQUOTED_STRUCT_KEY</rule-key>
+                <prop>
+                    <key>remediationFunction</key>
+                    <txt>CONSTANT_ISSUE</txt>
+                </prop>
+                <prop>
+                    <key>offset</key>
+                    <val>5</val>
+                    <txt>min</txt>
+                </prop>
+            </chc>
+            <chc>
+                <rule-key>PACKAGE_CASE_MISMATCH</rule-key>
                 <prop>
                     <key>remediationFunction</key>
                     <txt>CONSTANT_ISSUE</txt>
