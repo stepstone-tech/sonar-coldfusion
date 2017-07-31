@@ -50,7 +50,8 @@ public class CFLintAnalyzer {
 
         addCflintJavaOpts(command);
 
-        command.addArgument("-jar")
+        command.setDirectory(this.fs.baseDir())
+                .addArgument("-jar")
                 .addArgument(extractCflintJar().getPath())
                 .addArgument("-xml")
                 .addArgument("-folder")
