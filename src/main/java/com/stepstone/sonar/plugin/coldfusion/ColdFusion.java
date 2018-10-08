@@ -16,21 +16,21 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion;
 
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
 public class ColdFusion extends AbstractLanguage {
 
-    private final Settings settings;
+    private final Configuration configuration;
 
-    public ColdFusion(Settings settings) {
+    public ColdFusion(Configuration configuration) {
         super(ColdFusionPlugin.LANGUAGE_KEY, ColdFusionPlugin.LANGUAGE_NAME);
-        this.settings = settings;
+        this.configuration = configuration;
     }
 
     @Override
     public String[] getFileSuffixes() {
-        return settings.getStringArray(ColdFusionPlugin.FILE_SUFFIXES_KEY);
+        return configuration.getStringArray(ColdFusionPlugin.FILE_SUFFIXES_KEY);
     }
 
     @Override
@@ -47,14 +47,14 @@ public class ColdFusion extends AbstractLanguage {
 
         ColdFusion that = (ColdFusion) o;
 
-        return !(settings != null ? !settings.equals(that.settings) : that.settings != null);
+        return !(configuration != null ? !configuration.equals(that.configuration) : that.configuration != null);
 
     }
 
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (settings != null ? settings.hashCode() : 0);
+        result = 31 * result + (configuration != null ? configuration.hashCode() : 0);
         return result;
     }
 }

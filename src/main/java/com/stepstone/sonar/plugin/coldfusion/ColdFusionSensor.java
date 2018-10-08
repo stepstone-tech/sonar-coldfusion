@@ -17,7 +17,6 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion;
 
 import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintAnalysisResultImporter;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
@@ -25,6 +24,8 @@ import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
@@ -34,6 +35,7 @@ public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
 
     private final FileSystem fs;
     private final RulesProfile ruleProfile;
+    private final Logger LOGGER = Loggers.get(ColdFusionSensor.class);
 
     public ColdFusionSensor(FileSystem fs, RulesProfile ruleProfile) {
         Preconditions.checkNotNull(fs);
@@ -56,7 +58,7 @@ public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
             analyze(context);
             importResults(context);
         } catch (IOException | XMLStreamException e) {
-            Throwables.propagate(e);
+            LOGGER.error("",e);
         }
     }
 
@@ -71,7 +73,11 @@ public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
     }
 
     protected void importResults(SensorContext sensorContext) {
-        new CFlintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
+        try {
+            new CFlintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
+        } catch (IOException | XMLStreamException e) {
+            LOGGER.error(",e");
+        }
     }
 }
 

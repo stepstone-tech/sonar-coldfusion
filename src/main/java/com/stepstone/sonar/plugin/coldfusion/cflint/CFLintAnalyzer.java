@@ -17,10 +17,11 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
 import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.SensorContext;
-import org.sonar.api.config.Settings;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.command.Command;
 import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
@@ -34,19 +35,19 @@ import java.io.IOException;
 public class CFLintAnalyzer {
 
     private final Logger LOGGER = Loggers.get(CFLintAnalyzer.class);
-    private final Settings settings;
+    private final Configuration settings;
     private final FileSystem fs;
 
     public CFLintAnalyzer(SensorContext sensorContext) {
         Preconditions.checkNotNull(sensorContext);
 
-        this.settings = sensorContext.settings();
+        this.settings = sensorContext.config();
         this.fs = sensorContext.fileSystem();
     }
 
     public void analyze(File configFile) throws IOException, XMLStreamException {
 
-        final Command command = Command.create(settings.getString(ColdFusionPlugin.CFLINT_JAVA));
+        final Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).get());
 
         addCflintJavaOpts(command);
 
@@ -54,7 +55,7 @@ public class CFLintAnalyzer {
                 .addArgument(extractCflintJar().getPath())
                 .addArgument("-xml")
                 .addArgument("-folder")
-                .addArgument(settings.getString("sonar.sources"))
+                .addArgument(settings.get("sonar.sources").get())
                 .addArgument("-xmlfile")
                 .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
                 .addArgument("-configfile")
@@ -71,12 +72,14 @@ public class CFLintAnalyzer {
     }
 
     protected void addCflintJavaOpts(Command command) {
-        final String cflintJavaOpts = settings.getString(ColdFusionPlugin.CFLINT_JAVA_OPTS);
+        if(settings.get(ColdFusionPlugin.CFLINT_JAVA_OPTS).isPresent()) {
+            final String cflintJavaOpts = settings.get(ColdFusionPlugin.CFLINT_JAVA_OPTS).get();
 
-        if (cflintJavaOpts != null) {
-            final String[] arguments = cflintJavaOpts.split(" ");
-            for (String argument : arguments) {
-                command.addArgument(argument);
+            if (!Strings.isNullOrEmpty(cflintJavaOpts)) {
+                final String[] arguments = cflintJavaOpts.split(" ");
+                for (String argument : arguments) {
+                    command.addArgument(argument);
+                }
             }
         }
     }

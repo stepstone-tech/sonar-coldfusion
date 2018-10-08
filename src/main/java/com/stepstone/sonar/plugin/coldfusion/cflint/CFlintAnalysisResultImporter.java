@@ -16,8 +16,6 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Throwables;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.IssueAttributes;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.LocationAttributes;
@@ -27,6 +25,8 @@ import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.rule.RuleKey;
+import org.sonar.api.utils.log.Logger;
+import org.sonar.api.utils.log.Loggers;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -41,18 +41,19 @@ public class CFlintAnalysisResultImporter {
     private final FileSystem fs;
     private final SensorContext sensorContext;
     private XMLStreamReader stream;
+    private final Logger LOGGER = Loggers.get(CFlintAnalysisResultImporter.class);
 
     public CFlintAnalysisResultImporter(FileSystem fs, SensorContext sensorContext) {
         this.fs = fs;
         this.sensorContext = sensorContext;
     }
 
-    public void parse(File file) {
+    public void parse(File file) throws IOException, XMLStreamException {
 
         try (FileReader reader = new FileReader(file)) {
             parse(reader);
         } catch (XMLStreamException | IOException e) {
-            throw Throwables.propagate(e);
+            throw e;
         } finally {
             closeXmlStream();
         }
@@ -70,7 +71,6 @@ public class CFlintAnalysisResultImporter {
                 String tagName = stream.getLocalName();
 
                 if ("issue".equals(tagName)) {
-
                     handleIssueTag(new IssueAttributes(stream));
                 }
             }
@@ -82,18 +82,17 @@ public class CFlintAnalysisResultImporter {
             int next = stream.next();
 
             if (next == XMLStreamConstants.END_ELEMENT && "issue".equals(stream.getLocalName())) {
-
                 break;
-
             } else if (next == XMLStreamConstants.START_ELEMENT) {
 
                 String tagName = stream.getLocalName();
 
                 if ("location".equals(tagName)) {
-
                     LocationAttributes locationAttributes = new LocationAttributes(stream);
                     InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(locationAttributes.getFile().get()));
-
+                    if(inputFile == null){
+                        LOGGER.error("File {} is null",locationAttributes.getFile().get());
+                    }
                     createNewIssue(issueAttributes, locationAttributes, inputFile);
                 }
             }
@@ -101,10 +100,20 @@ public class CFlintAnalysisResultImporter {
     }
 
     private void createNewIssue(IssueAttributes issueAttributes, LocationAttributes locationAttributes, InputFile inputFile) {
-        Preconditions.checkNotNull(issueAttributes);
-        Preconditions.checkNotNull(locationAttributes);
-        Preconditions.checkNotNull(inputFile);
+        if(issueAttributes == null){
+            LOGGER.error("Problem creating issue for file {} issueAttributes is null", inputFile);
+        }
+        if(locationAttributes == null){
+            LOGGER.error("Problem creating issue for file {} locationAttributes is null", inputFile);
+        }
+        if(inputFile==null){
+            LOGGER.error("Problem creating issue for file inputFile is null");
+        }
+        if(issueAttributes == null || locationAttributes == null || inputFile == null){
+            return;
+        }
 
+        LOGGER.debug("create New Issue {} for file {}", issueAttributes, inputFile.filename());
         final NewIssue issue = sensorContext.newIssue();
 
         final NewIssueLocation issueLocation = issue.newLocation();
@@ -117,12 +126,12 @@ public class CFlintAnalysisResultImporter {
         issue.save();
     }
 
-    private void closeXmlStream() {
+    private void closeXmlStream() throws XMLStreamException {
         if (stream != null) {
             try {
                 stream.close();
             } catch (Exception e) {
-                throw Throwables.propagate(e);
+                throw e;
             }
         }
     }

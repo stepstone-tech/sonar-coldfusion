@@ -6,16 +6,12 @@
     <groupId>com.stepstone.sonar.plugin</groupId>
     <artifactId>sonar-coldfusion-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.6-SNAPSHOT</version>
+    <version>1.6.1-SNAPSHOT</version>
 
     <name>SonarQube Coldfusion Analyzer</name>
     <description>Enables scanning of ColdFusion source files</description>
-    <url>https://github.com/stepstone-tech/sonar-coldfusion</url>
+    <url>https://github.com/nbihan-mediware/sonar-coldfusion</url>
 
-    <organization>
-        <name>StepStone GmbH</name>
-        <url>http://www.stepstone.com/</url>
-    </organization>
     <licenses>
         <license>
             <name>The Apache Software License, Version 2.0</name>
@@ -25,47 +21,42 @@
     </licenses>
 
     <scm>
-        <connection>git@github.com:stepstone-tech/sonar-coldfusion.git</connection>
-        <developerConnection>git@github.com:stepstone-tech/sonar-coldfusion.git</developerConnection>
-        <url>https://github.com/stepstone-tech/sonar-coldfusion</url>
+        <connection>git@github.com:nbihan-mediware/sonar-coldfusion.git</connection>
+        <developerConnection>git@github.com:nbihan-mediware/sonar-coldfusion.git</developerConnection>
+        <url>https://github.com/nbihan-mediware/sonar-coldfusion</url>
         <tag>HEAD</tag>
     </scm>
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/stepstone-tech/sonar-coldfusion/issues</url>
+        <url>https://github.com/nbihan-mediware/sonar-coldfusion/issues</url>
     </issueManagement>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-
-        <sonar.version>5.6</sonar.version>
-        <cflint.version>1.2.0</cflint.version>
+        <sonar.version>6.7.5</sonar.version>
+        <cflint.version>1.2.3</cflint.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>org.sonarsource.sslr-squid-bridge</groupId>
             <artifactId>sslr-squid-bridge</artifactId>
-            <version>2.6.1</version>
+            <version>2.7.0.377</version>
             <exclusions>
                 <exclusion>
                     <artifactId>sonar-plugin-api</artifactId>
-                    <groupId>org.codehaus.sonar</groupId>
+                    <groupId>org.sonarsource.sonarqub</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
+        <!-- This will be the server API-->
         <dependency>
             <groupId>org.sonarsource.sonarqube</groupId>
             <artifactId>sonar-plugin-api</artifactId>
             <version>${sonar.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.6</version>
         </dependency>
     </dependencies>
 
@@ -74,7 +65,7 @@
             <plugin>
                 <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
                 <artifactId>sonar-packaging-maven-plugin</artifactId>
-                <version>1.16</version>
+                <version>1.18.0.372</version>
                 <extensions>true</extensions>
                 <configuration>
                     <pluginClass>com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin</pluginClass>
