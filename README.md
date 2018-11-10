@@ -2,6 +2,28 @@
 
 A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, based on the [CFLint library](https://github.com/cflint/CFLint).
 
+## Build
+
+Setup Maven settings.xml with
+
+```xml
+  <servers>
+    <server>
+        <id>github</id>
+        <privateKey>yourprivatekey</privateKey>
+    </server>
+  </servers>
+```
+
+Run Maven goal
+
+```bash
+mvn clean package de.jutzig:github-release-plugin:1.3.0:release 
+```
+
+This will build the plugin jar file, create a release and a tag on github and upload the artifact to
+the [repo](https://github.com/nbihan-mediware/sonar-coldfusion).
+
 ## Installation
 
 1. Download the JAR file from the [releases section](https://github.com/stepstone-tech/sonar-coldfusion/releases) or build it yourself by cloning the code and running `mvn install`.
@@ -33,7 +55,7 @@ sonar.ce.javaOpts=-Xmx2g -Xms128m -XX:+HeapDumpOnOutOfMemoryError
 
 ## License
 
-Copyright 2016 StepStone GmbH
+Based on StepStone GmbH [repo](https://github.com/stepstone-tech/sonar-coldfusion)
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

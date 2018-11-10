@@ -6,7 +6,7 @@
     <groupId>com.stepstone.sonar.plugin</groupId>
     <artifactId>sonar-coldfusion-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.6.1-SNAPSHOT</version>
+    <version>1.6.2.1-SNAPSHOT</version>
 
     <name>SonarQube Coldfusion Analyzer</name>
     <description>Enables scanning of ColdFusion source files</description>
@@ -40,7 +40,7 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.version>6.7.5</sonar.version>
-        <cflint.version>1.2.3</cflint.version>
+        <cflint.version>1.4.1</cflint.version>
     </properties>
 
     <dependencies>
@@ -74,6 +74,8 @@
                 <configuration>
                     <pluginClass>com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin</pluginClass>
                     <pluginName>ColdFusion</pluginName>
+                    <pluginDescription>CFLint 1.4.1 Plugin for Sonarqube</pluginDescription>
+                    <pluginSourcesUrl>https://github.com/nbihan-mediware/sonar-coldfusion</pluginSourcesUrl>
                 </configuration>
             </plugin>
             <plugin>
@@ -101,6 +103,24 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>de.jutzig</groupId>
+                <artifactId>github-release-plugin</artifactId>
+                <version>1.3.0</version>
+                <configuration>
+                    <description>Sonarqube Coldfusion Plugin release</description>
+                    <releaseName>${project.version}</releaseName>
+                    <tag>${project.version}</tag>
+                    <fileSets>
+                        <fileSet>
+                            <directory>${project.build.directory}</directory>
+                            <includes>
+                                <include>${project.artifactId}*.jar</include>
+                            </includes>
+                        </fileSet>
+                    </fileSets>
+                </configuration>
             </plugin>
         </plugins>
     </build>
