@@ -91,7 +91,7 @@ public class CFlintAnalysisResultImporter {
                     LocationAttributes locationAttributes = new LocationAttributes(stream);
                     InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(locationAttributes.getFile().get()));
                     if(inputFile == null){
-                        LOGGER.error("File {} is null",locationAttributes.getFile().get());
+                        LOGGER.error("File {} is null", locationAttributes.getFile().get());
                     }
                     createNewIssue(issueAttributes, locationAttributes, inputFile);
                 }
@@ -110,6 +110,11 @@ public class CFlintAnalysisResultImporter {
             LOGGER.error("Problem creating issue for file inputFile is null");
         }
         if(issueAttributes == null || locationAttributes == null || inputFile == null){
+            return;
+        }
+
+        if(locationAttributes.getLine().isPresent() && locationAttributes.getLine().get()>inputFile.lines()){
+            LOGGER.error("Problem creating issue for file {}, issue is line {} but file has {} lines", inputFile, locationAttributes.getLine().get(), inputFile.lines());
             return;
         }
 
