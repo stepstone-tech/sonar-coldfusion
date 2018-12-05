@@ -88,7 +88,7 @@ public class CFLintAnalyzer {
 
         @Override
         public void consumeLine(String line) {
-            LOGGER.info(line);
+            LOGGER.info("Consuming line {}", line);
         }
 
     }
@@ -97,9 +97,8 @@ public class CFLintAnalyzer {
 
         @Override
         public void consumeLine(String line) {
-            LOGGER.error(line);
+            LOGGER.error("Error consuming line {}",line);
         }
-
     }
 
 }

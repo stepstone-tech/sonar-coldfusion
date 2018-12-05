@@ -35,4 +35,17 @@ class TagAttribute {
 
         return Optional.absent();
     }
+
+
+    protected Integer getAttributeInteger(String name, XMLStreamReader stream) {
+
+        for (int i = 0; i < stream.getAttributeCount(); i++) {
+
+            if (name.equalsIgnoreCase(stream.getAttributeLocalName(i))) {
+                return Integer.valueOf(stream.getAttributeValue(i));
+            }
+        }
+
+        return Integer.valueOf(0);
+    }
 }

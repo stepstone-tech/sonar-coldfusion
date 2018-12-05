@@ -23,12 +23,12 @@ import javax.xml.stream.XMLStreamReader;
 
 public class LocationAttributes extends TagAttribute {
 
-    private final Optional<String> file;
+    private final String file;
     private final Optional<Integer> line;
     private final Optional<String> message;
 
     public LocationAttributes(XMLStreamReader stream) {
-        file = getAttributeValue("file", stream);
+        file = getAttributeValue("file", stream).get();
         message = getAttributeValue("message", stream);
 
         Optional<String> line = getAttributeValue("line", stream);
@@ -40,7 +40,7 @@ public class LocationAttributes extends TagAttribute {
         }
     }
 
-    public Optional<String> getFile() {
+    public String getFile() {
         return file;
     }
 

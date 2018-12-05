@@ -21,6 +21,7 @@ import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintAnalysisResultImporter;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.profiles.RulesProfile;
@@ -31,7 +32,7 @@ import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
 
-public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
+public class ColdFusionSensor implements Sensor {
 
     private final FileSystem fs;
     private final RulesProfile ruleProfile;
@@ -79,5 +80,6 @@ public class ColdFusionSensor implements org.sonar.api.batch.sensor.Sensor {
             LOGGER.error(",e");
         }
     }
+
 }
 
