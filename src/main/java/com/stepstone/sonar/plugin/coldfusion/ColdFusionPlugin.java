@@ -30,6 +30,7 @@ import org.sonar.api.Property;
                 name = "File suffixes",
                 description = "Comma-separated list of suffixes of files to analyze.",
                 project = true,
+                multiValues = true,
                 global = true
         ),
         @Property(

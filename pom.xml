@@ -6,7 +6,7 @@
     <groupId>com.stepstone.sonar.plugin</groupId>
     <artifactId>sonar-coldfusion-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>1.6.5-SNAPSHOT</version>
+    <version>1.6.6-SNAPSHOT</version>
 
     <name>SonarQube Coldfusion Analyzer</name>
     <description>Enables scanning of ColdFusion source files</description>
@@ -39,7 +39,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
-        <sonar.version>6.7.5</sonar.version>
+        <sonar.version>6.7.6</sonar.version>
         <cflint.version>1.2.3</cflint.version>
     </properties>
 

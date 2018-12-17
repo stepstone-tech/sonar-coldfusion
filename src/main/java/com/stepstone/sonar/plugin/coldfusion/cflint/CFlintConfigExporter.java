@@ -50,19 +50,26 @@ public class CFlintConfigExporter {
 
     public void save(Writer writer) throws IOException, XMLStreamException {
         final XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-        XMLStreamWriter xtw = xmlOutputFactory.createXMLStreamWriter(writer);
+        XMLStreamWriter xtw=null;
+        try {
+            xtw = xmlOutputFactory.createXMLStreamWriter(writer);
 
-        xtw.writeStartDocument();
-        xtw.writeStartElement("config");
+            xtw.writeStartDocument();
+            xtw.writeStartElement("config");
 
-        for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(repositoryKey)) {
-            xtw.writeStartElement("includes");
-            xtw.writeAttribute("code", activeRule.getRuleKey());
+            for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(repositoryKey)) {
+                xtw.writeStartElement("includes");
+                xtw.writeAttribute("code", activeRule.getRuleKey());
+                xtw.writeEndElement();
+            }
+
             xtw.writeEndElement();
+            xtw.writeEndDocument();
+        } finally {
+            if(xtw!=null) {
+                xtw.close();
+            }
         }
 
-        xtw.writeEndElement();
-        xtw.writeEndDocument();
-        xtw.close();
     }
 }

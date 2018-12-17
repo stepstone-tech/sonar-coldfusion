@@ -31,6 +31,7 @@ import org.sonar.api.utils.log.Loggers;
 import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 
 public class ColdFusionSensor implements Sensor {
 
@@ -63,21 +64,32 @@ public class ColdFusionSensor implements Sensor {
         }
     }
 
-    protected void analyze(SensorContext context) throws IOException, XMLStreamException {
-        new CFLintAnalyzer(context).analyze(generateCflintConfig());
+    private void analyze(SensorContext context) throws IOException, XMLStreamException {
+        File configFile = generateCflintConfig();
+        new CFLintAnalyzer(context).analyze(configFile);
+        //when analysis is done we delete the created file
+        deleteFile(configFile);
     }
 
-    protected File generateCflintConfig() throws IOException, XMLStreamException {
+    private File generateCflintConfig() throws IOException, XMLStreamException {
         final File configFile = new File(fs.workDir(), "cflint-config.xml");
         new CFlintConfigExporter(ruleProfile).save(configFile);
         return configFile;
     }
 
-    protected void importResults(SensorContext sensorContext) {
+    private void deleteFile(File configFile) throws IOException {
+        if(configFile!= null){
+           Files.deleteIfExists(configFile.toPath());
+        }
+    }
+
+    private void importResults(SensorContext sensorContext) throws IOException {
         try {
             new CFlintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
-        } catch (IOException | XMLStreamException e) {
+        } catch (XMLStreamException e) {
             LOGGER.error(",e");
+        } finally {
+            deleteFile(new File(fs.workDir(), "cflint-result.xml"));
         }
     }
 
