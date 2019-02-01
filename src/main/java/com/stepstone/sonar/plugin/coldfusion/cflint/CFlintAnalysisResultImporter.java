@@ -17,16 +17,13 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import com.stepstone.sonar.plugin.coldfusion.cflint.xml.CountsAttributes;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.IssueAttributes;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.LocationAttributes;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.issue.NewIssue;
 import org.sonar.api.batch.sensor.issue.NewIssueLocation;
-import org.sonar.api.measures.CoreMetrics;
 import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -76,40 +73,9 @@ public class CFlintAnalysisResultImporter {
 
                 if ("issue".equals(tagName)) {
                     handleIssueTag(new IssueAttributes(stream));
-                } else if ("counts".equals(tagName)) {
-                    handleCountsTag(new CountsAttributes(stream));
                 }
             }
         }
-    }
-
-    private void handleCountsTag(CountsAttributes countsAttributes){
-        Metric metricLines = new Metric() {
-            @Override
-            public String key() {
-                return CoreMetrics.LINES.key();
-            }
-
-            @Override
-            public Class valueType() {
-                return Integer.class;
-            }
-        };
-
-        Metric metricFiles = new Metric() {
-            @Override
-            public String key() {
-                return CoreMetrics.FILES.key();
-            }
-
-            @Override
-            public Class valueType() {
-                return Integer.class;
-            }
-        };
-        LOGGER.info("CFLint analyzed {} lines for {} files", countsAttributes.getTotalLines(), countsAttributes.getTotalFiles());
-        sensorContext.newMeasure().on(sensorContext.module()).forMetric(metricLines).withValue(countsAttributes.getTotalLines()).save();
-        sensorContext.newMeasure().on(sensorContext.module()).forMetric(metricFiles).withValue(countsAttributes.getTotalFiles()).save();
     }
 
     private void handleIssueTag(IssueAttributes issueAttributes) throws XMLStreamException {
@@ -125,11 +91,8 @@ public class CFlintAnalysisResultImporter {
 
                 if ("location".equals(tagName)) {
                     LocationAttributes locationAttributes = new LocationAttributes(stream);
-                    //InputFile inputFiletest = fs.inputFiles(fs.predicates().hasFilename())
+
                     InputFile inputFile = fs.inputFile(fs.predicates().hasAbsolutePath(locationAttributes.getFile()));
-                    if(inputFile == null){
-                        LOGGER.error("File {} is null", locationAttributes.getFile());
-                    }
                     createNewIssue(issueAttributes, locationAttributes, inputFile);
                 }
             }
@@ -138,13 +101,13 @@ public class CFlintAnalysisResultImporter {
 
     private void createNewIssue(IssueAttributes issueAttributes, LocationAttributes locationAttributes, InputFile inputFile) {
         if(issueAttributes == null){
-            LOGGER.error("Problem creating issue for file {} issueAttributes is null", inputFile);
+            LOGGER.debug("Problem creating issue for file {} issueAttributes is null", inputFile);
         }
         if(locationAttributes == null){
-            LOGGER.error("Problem creating issue for file {} locationAttributes is null", inputFile);
+            LOGGER.debug("Problem creating issue for file {} locationAttributes is null", inputFile);
         }
         if(inputFile==null){
-            LOGGER.error("Problem creating issue for file inputFile is null");
+            LOGGER.debug("Problem creating issue for file inputFile is null");
         }
         if(issueAttributes == null || locationAttributes == null || inputFile == null){
             return;

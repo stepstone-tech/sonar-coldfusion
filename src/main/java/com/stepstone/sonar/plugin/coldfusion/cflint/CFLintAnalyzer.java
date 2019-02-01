@@ -46,25 +46,35 @@ public class CFLintAnalyzer {
     }
 
     public void analyze(File configFile) throws IOException, XMLStreamException {
+        File executableJar = null;
+        try {
+            Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).get());
 
-        final Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).get());
-
-        addCflintJavaOpts(command);
-
-        command.addArgument("-jar")
-                .addArgument(extractCflintJar().getPath())
+            addCflintJavaOpts(command);
+            executableJar = extractCflintJar();
+            command.addArgument("-jar")
+                .addArgument(executableJar.getPath())
                 .addArgument("-xml")
                 .addArgument("-folder")
-                .addArgument(settings.get("sonar.sources").get())
+                .addArgument(settings.get("sonar.projectBaseDir").get())
                 .addArgument("-xmlfile")
                 .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
                 .addArgument("-configfile")
                 .addArgument(configFile.getPath());
 
-        int exitCode = CommandExecutor.create().execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
-        if (exitCode != 0) {
-            throw new IllegalStateException("The CFLint analyzer failed with exit code: " + exitCode);
+            CommandExecutor executor = CommandExecutor.create();
+            int exitCode = executor.execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
+
+            if (exitCode != 0) {
+                throw new IllegalStateException("The CFLint analyzer failed with exit code: " + exitCode);
+            }
+        } finally {
+            //cleanup
+            if(executableJar!= null && executableJar.exists()) {
+                executableJar.deleteOnExit();
+            }
         }
+
     }
 
     protected File extractCflintJar() throws IOException {

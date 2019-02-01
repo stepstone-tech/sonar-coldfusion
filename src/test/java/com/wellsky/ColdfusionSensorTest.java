@@ -10,7 +10,10 @@ import org.mockito.Mockito;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
+import org.sonar.api.batch.fs.internal.DefaultInputFile;
+import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.batch.sensor.measure.Measure;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.internal.apachecommons.codec.Charsets;
 import org.sonar.api.measures.CoreMetrics;
@@ -31,6 +34,8 @@ import static org.mockito.Mockito.when;
 public class ColdfusionSensorTest {
 
     private RulesProfile rulesProfile = RulesProfile.create(RulesProfile.SONAR_WAY_NAME, ColdFusionPlugin.LANGUAGE_NAME);
+    private File baseDir = new File("src/test/resources").getAbsoluteFile();
+    private SensorContextTester context = SensorContextTester.create(baseDir);
 
     @Rule
     public TemporaryFolder tmpFolder = new TemporaryFolder();
@@ -41,32 +46,46 @@ public class ColdfusionSensorTest {
         fileSystem.setEncoding(Charsets.UTF_8);
         fileSystem.setWorkDir(tmpFolder.getRoot().toPath());
 
-        File sourceDir = new File("src/test/resources");
-        SensorContextTester context = SensorContextTester.create(sourceDir.toPath());
         context.setFileSystem(fileSystem);
         context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(6, 7), SonarQubeSide.SCANNER));
+
+        context.settings().appendProperty("sonar.projectBaseDir", baseDir.getPath());
+        addFilesToFs();
+
         CommandExecutor commandExecutor = CommandExecutor.create();
         String javaHome = System.getProperty("java.home");
         Assert.assertTrue(javaHome!=null && !javaHome.equals(""));
-        //FIXME get Java on Linux too and check there is java Home set
+
         if(OSValidator.isWindows()) {
             context.settings().appendProperty(ColdFusionPlugin.CFLINT_JAVA, javaHome + "/bin/java.exe");
         } else {
             context.settings().appendProperty(ColdFusionPlugin.CFLINT_JAVA, javaHome + "/bin/java");
         }
 
-        context.settings().appendProperty("sonar.sources",sourceDir.getPath());
-        // Mock visitor for metrics.
-        FileLinesContext fileLinesContext = mock(FileLinesContext.class);
-        FileLinesContextFactory fileLinesContextFactory = mock(FileLinesContextFactory.class);
-        when(fileLinesContextFactory.createFor(any(InputFile.class))).thenReturn(fileLinesContext);
-        context = Mockito.spy(context);
         ColdFusionSensor sensor = new ColdFusionSensor(context.fileSystem(), rulesProfile);
         sensor.execute(context);
 
-        assertThat(context.measure(context.module().key(), CoreMetrics.FILES.key()).value()).isEqualTo(2);
+        Integer nloc = 0;
+        Integer comments = 0;
+        for (InputFile o : context.fileSystem().inputFiles()) {
+            Measure<Integer> measureNloc = context.measure(o.key(),CoreMetrics.NCLOC.key());
+            Measure<Integer> measureComment = context.measure(o.key(),CoreMetrics.COMMENT_LINES.key());
+            nloc+=measureNloc.value();
+            comments+=measureComment.value();
+        }
 
-        assertThat(context.measure(context.module().key(), CoreMetrics.LINES.key()).value()).isEqualTo(19);
+        assertThat(nloc).isEqualTo(36);
+        assertThat(comments).isEqualTo(9);
+
+    }
+
+    private void addFilesToFs() {
+        DefaultInputFile inputFileMetrics1 = new TestInputFileBuilder(context.module().key(), baseDir.getAbsoluteFile(), new File("src/test/resources/testmetrics1.cfm").getAbsoluteFile()).setLanguage(ColdFusionPlugin.LANGUAGE_KEY).build();
+        context.fileSystem().add(inputFileMetrics1);
+        DefaultInputFile inputFileMetrics2 = new TestInputFileBuilder(context.module().key(), baseDir.getAbsoluteFile(), new File("src/test/resources/testmetrics2.cfm").getAbsoluteFile()).setLanguage(ColdFusionPlugin.LANGUAGE_KEY).build();
+        context.fileSystem().add(inputFileMetrics2);
+        DefaultInputFile inputFileMetrics3 = new TestInputFileBuilder(context.module().key(), baseDir.getAbsoluteFile(), new File("src/test/resources/EpisodeClaim.cfc").getAbsoluteFile()).setLanguage(ColdFusionPlugin.LANGUAGE_KEY).build();
+        context.fileSystem().add(inputFileMetrics3);
     }
 
 }
