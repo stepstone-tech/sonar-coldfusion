@@ -138,12 +138,6 @@ public class ColdFusionSensor implements Sensor {
         int commentLines = 0;
         int blankLines = 0;
         int lines = 0;
-        Metric metricLinesOfCode = CoreMetrics.NCLOC;
-        Metric metricLines = CoreMetrics.LINES;
-        Metric metricCommentLines = CoreMetrics.COMMENT_LINES;
-        if(inputFile==null){
-            return;
-        }
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.inputStream()))) {
             if (inputFile.inputStream() != null) {
@@ -166,10 +160,9 @@ public class ColdFusionSensor implements Sensor {
                 }
             }
         }
-
-        context.newMeasure().forMetric(metricCommentLines).on(inputFile).withValue(commentLines).save();
-        context.newMeasure().forMetric(metricLinesOfCode).on(inputFile).withValue(lines-blankLines-commentLines).save();
-        context.newMeasure().forMetric(metricLines).on(inputFile).withValue(lines).save();
+        context.<Integer>newMeasure().forMetric(CoreMetrics.COMMENT_LINES).on(inputFile).withValue(commentLines).save();
+        context.<Integer>newMeasure().forMetric(CoreMetrics.NCLOC).on(inputFile).withValue(lines-blankLines-commentLines).save();
+        context.<Integer>newMeasure().forMetric(CoreMetrics.LINES).on(inputFile).withValue(lines).save();
     }
 
 }

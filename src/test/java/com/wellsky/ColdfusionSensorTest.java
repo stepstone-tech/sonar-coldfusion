@@ -41,7 +41,7 @@ public class ColdfusionSensorTest {
     public TemporaryFolder tmpFolder = new TemporaryFolder();
 
     @Test
-    public void testBasicCFMAnalysis() throws IOException {
+    public void testBasicCFMAnalysis() {
         DefaultFileSystem fileSystem = new DefaultFileSystem(tmpFolder.getRoot());
         fileSystem.setEncoding(Charsets.UTF_8);
         fileSystem.setWorkDir(tmpFolder.getRoot().toPath());
@@ -66,17 +66,13 @@ public class ColdfusionSensorTest {
         sensor.execute(context);
 
         Integer nloc = 0;
-        Integer comments = 0;
-        for (InputFile o : context.fileSystem().inputFiles()) {
-            Measure<Integer> measureNloc = context.measure(o.key(),CoreMetrics.NCLOC.key());
-            Measure<Integer> measureComment = context.measure(o.key(),CoreMetrics.COMMENT_LINES.key());
-            nloc+=measureNloc.value();
-            comments+=measureComment.value();
+        for (InputFile inputFile : context.fileSystem().inputFiles()) {
+            Measure<Integer> measureNloc = context.measure(inputFile.key(),CoreMetrics.NCLOC);
+            if(measureNloc!=null) {
+                nloc += measureNloc.value();
+            }
         }
-
         assertThat(nloc).isEqualTo(36);
-        assertThat(comments).isEqualTo(9);
-
     }
 
     private void addFilesToFs() {
