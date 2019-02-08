@@ -13,7 +13,7 @@
         <name>Variable declared in both var and argument scopes.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Variable should not be declared in both local and argument scopes.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -21,7 +21,7 @@
         <name>Variable referenced in local and argument scopes.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Variable should not be referenced in local and argument scope.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -29,14 +29,14 @@
         <name>Missing default switch statement.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Not having a Default statement defined for a switch could pose potential issues.</p> ]]></description>
     </rule>
     <rule>
         <key>GLOBAL_VAR</key>
         <name>Global variable exists.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Identifier is global. Referencing in a CFC or function should be avoided.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -44,29 +44,29 @@
         <name>Nested cfoutput with cfquery tag.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Nested CFOutput, outer CFOutput has <code>@query</code>.</p> ]]></description>
     </rule>
     <rule>
         <key>OUTPUT_ATTR</key>
         <name>Tag should have output='false'.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p><code><tag name="variable"></code> should have @output='false'</p> ]]></description>
     </rule>
     <rule>
         <key>QUERYPARAM_REQ</key>
         <name>SetSql() statement should use .addParam().</name>
         <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>setSql() statement should use .addParam() instead of #'s name="variable"</p> ]]></description>
         <tag>security</tag>
     </rule>
     <rule>
         <key>CFQUERYPARAM_REQ</key>
-        <name>cfquery should use</name>
+        <name>cfquery should use cfqueryparam</name>
         <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p><code><tag></code> should use <code><cfqueryparam/></code> for variable 'variable'.</p> ]]></description>
         <tag>security</tag>
     </rule>
     <rule>
@@ -82,7 +82,7 @@
         <name>Variable is not declared with a var statement.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Variable is not declared with a var statement.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -90,7 +90,7 @@
         <name>Avoid use of cfdump tags.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid leaving <code><cfdump></code> tags in committed code. Debug information should be omitted from release code</p> ]]></description>
         <tag>security</tag>
     </rule>
     <rule>
@@ -98,7 +98,7 @@
         <name>Avoid use of cfexecute tags.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid leaving <code><cfexecute></code> tags in committed code. CFexecute can be used as an attack vector and is slow.</p> ]]></description>
         <tag>security</tag>
     </rule>
     <rule>
@@ -107,14 +107,14 @@
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p>Avoid using the <code>isDate()</code> built-in function. It is too permissive. Use <code>isValid()</code> instead.</p> ]]></description>
-        <tag>security</tag>
+        <tag>bug</tag>
     </rule>
     <rule>
         <key>AVOID_USING_CFABORT_TAG</key>
         <name>Avoid use of cfabort tags.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid leaving <code><cfabort></code> tags in committed code.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -122,7 +122,7 @@
         <name>Avoid use of abort statements.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid using abort in production code.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -130,7 +130,7 @@
         <name>Avoid use of cfinsert tags.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid using <code><cfinsert></code> tags. Use cfquery and cfstoredproc instead.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -146,7 +146,7 @@
         <name>Avoid use of cfupdate tags.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid using <code><cfupdate></code> tags. Use cfquery and cfstoredproc instead.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -154,7 +154,7 @@
         <name>Avoid use of cfinclude tags.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid using <code><cfinclude></code> tags. Use components instead.</p> ]]></description>
 
     </rule>
     <rule>
@@ -183,14 +183,14 @@
         <name>Argument is missing a hint.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p>Use JavaDoc style annotations on cfscript functions.</p> ]]></description>
+        <description><![CDATA[ <p>Argument is missing a hint. Use javadoc style annotations on cfscript functions.</p> ]]></description>
     </rule>
     <rule>
         <key>ARG_TYPE_MISSING</key>
         <name>Component is missing a type.</name>
         <severity>BLOCKER</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Argument variable is missing a type.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -206,14 +206,14 @@
         <name>Method is too long.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Function should be fewer than 100 lines.</p> ]]></description>
     </rule>
     <rule>
         <key>EXCESSIVE_COMPONENT_LENGTH</key>
         <name>Component is too long.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Component should be fewer than 500 lines.</p> ]]></description>
     </rule>
     <rule>
         <key>FUNCTION_TYPE_MISSING</key>
@@ -236,21 +236,21 @@
         <name>Function has too many arguments.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Function has too many arguments. Should be fewer than 10.</p> ]]></description>
     </rule>
     <rule>
         <key>EXCESSIVE_FUNCTIONS</key>
         <name>Too many functions.</name>
-        <severity>MAJOR</severity>
+        <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Component has too many functions. Should be fewer than 10.</p> ]]></description>
     </rule>
     <rule>
         <key>FUNCTION_TOO_COMPLEX</key>
         <name>Function is too complex.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Function is too complex. Consider breaking the function into smaller functions.</p> ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_WRITEDUMP</key>
@@ -272,7 +272,7 @@
         <name>Avoid use of isdebugmode statements.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Avoid using the IsDebugMode function in production code.</p> ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_ARRAYNEW</key>
@@ -293,14 +293,14 @@
         <name>Checking boolean expression explicitly.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Explicit check of boolean expression is not needed.</p> ]]></description>
     </rule>
     <rule>
         <key>VAR_INVALID_NAME</key>
         <name>Variable has invalid name.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Variable is not a valid name. Please use camelCase or underscores.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -308,7 +308,7 @@
         <name>Variable name is allcaps.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Variable should not be upper case.</p> ]]></description>
     </rule>
     <rule>
         <key>VAR_TOO_SHORT</key>
@@ -343,7 +343,7 @@
         <name>Variable name has prefix or postfix.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Variable has prefix or postfix variable and could be named better.</p> ]]></description>
     </rule>
     <rule>
         <key>ARGUMENT_MISSING_NAME</key>
@@ -357,7 +357,7 @@
         <name>Argument has invalid name.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Please use camelCase or underscores.</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -493,21 +493,21 @@
         <name>Component name looks temporary.</name>
         <severity>MAJOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Component name component could be named better.</p> ]]></description>
     </rule>
     <rule>
         <key>COMPONENT_HAS_PREFIX_OR_POSTFIX</key>
         <name>Component name has prefix or postfix.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Component name has prefix or postfix and could be named better.</p> ]]></description>
     </rule>
     <rule>
         <key>FILE_SHOULD_START_WITH_LOWERCASE</key>
         <name>CFM File starts with upper case.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Filename starts with an upper case letter. Only components (.cfc files) should start with an upper case letter.</p> ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_CREATEOBJECT</key>
@@ -543,7 +543,7 @@
         <name>Using comparison where assignment was probably meant.</name>
         <severity>CRITICAL</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Comparing instead of Assigning</p> ]]></description>
         <tag>bug</tag>
     </rule>
     <rule>
@@ -559,7 +559,7 @@
         <name>Variable scope name is allcaps.</name>
         <severity>MINOR</severity>
         <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
+        <description><![CDATA[ <p>Scope variable should not be upper case.</p> ]]></description>
     </rule>
     <rule>
         <key>AVOID_USING_CFSETTING_DEBUG</key>
@@ -568,14 +568,6 @@
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
         <tag>security</tag>
-    </rule>
-    <rule>
-        <key>MISSING_SEMI</key>
-        <name>No semicolon!</name>
-        <severity>CRITICAL</severity>
-        <cardinality>SINGLE</cardinality>
-        <description><![CDATA[ <p></p> ]]></description>
-        <tag>bug</tag>
     </rule>
     <rule>
         <key>UNQUOTED_STRUCT_KEY</key>
@@ -649,5 +641,12 @@
         <cardinality>SINGLE</cardinality>
         <description><![CDATA[ <p></p> ]]></description>
         <tag>bug</tag>
+    </rule>
+    <rule>
+        <key>STRUCT_ARRAY_NOTATION</key>
+        <name>Use array notation</name>
+        <severity>MAJOR</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>Unquoted struct key variable is not case-sensitive. Using array notation is recommended.</p> ]]></description>
     </rule>
 </rules>
