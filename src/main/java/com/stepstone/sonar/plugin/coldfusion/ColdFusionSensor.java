@@ -26,7 +26,6 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Metric;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
@@ -39,7 +38,10 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 public class ColdFusionSensor implements Sensor {
 
@@ -75,9 +77,12 @@ public class ColdFusionSensor implements Sensor {
 
     private void analyze(SensorContext context) throws IOException, XMLStreamException {
         File configFile = generateCflintConfig();
-        new CFLintAnalyzer(context).analyze(configFile);
-        //when analysis is done we delete the created file
-        deleteFile(configFile);
+        try {
+            new CFLintAnalyzer(context).analyze(configFile);
+        } finally {
+            //when analysis is done we delete the created file
+            deleteFile(configFile);
+        }
     }
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
@@ -105,7 +110,7 @@ public class ColdFusionSensor implements Sensor {
     private void measureProcessor(SensorContext context) {
         LOGGER.info("Starting measure processor");
 
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
         List<Callable<Integer>> callableTasks = new ArrayList<>();
 
         for (InputFile inputFile : fs.inputFiles(fs.predicates().hasLanguage(ColdFusionPlugin.LANGUAGE_KEY))) {

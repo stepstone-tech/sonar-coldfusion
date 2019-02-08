@@ -66,13 +66,16 @@ public class ColdfusionSensorTest {
         sensor.execute(context);
 
         Integer nloc = 0;
-        for (InputFile inputFile : context.fileSystem().inputFiles()) {
-            Measure<Integer> measureNloc = context.measure(inputFile.key(),CoreMetrics.NCLOC);
-            if(measureNloc!=null) {
-                nloc += measureNloc.value();
-            }
+        Integer comments = 0;
+        for (InputFile o : context.fileSystem().inputFiles()) {
+            Measure<Integer> measureNloc = context.measure(o.key(),CoreMetrics.NCLOC.key());
+            Measure<Integer> measureComment = context.measure(o.key(),CoreMetrics.COMMENT_LINES.key());
+            nloc+=measureNloc.value();
+            comments+=measureComment.value();
         }
         assertThat(nloc).isEqualTo(36);
+        assertThat(comments).isEqualTo(9);
+
     }
 
     private void addFilesToFs() {
