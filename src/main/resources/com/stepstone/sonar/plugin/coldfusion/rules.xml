@@ -570,6 +570,14 @@
         <tag>security</tag>
     </rule>
     <rule>
+        <key>MISSING_SEMI</key>
+        <name>No semicolon!</name>
+        <severity>CRITICAL</severity>
+        <cardinality>SINGLE</cardinality>
+        <description><![CDATA[ <p>This statement is missing a semicolon!</p> ]]></description>
+        <tag>bug</tag>
+    </rule>
+    <rule>
         <key>UNQUOTED_STRUCT_KEY</key>
         <name>Unquoted struct key</name>
         <severity>MAJOR</severity>
