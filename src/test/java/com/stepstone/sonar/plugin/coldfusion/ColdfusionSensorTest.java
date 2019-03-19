@@ -14,7 +14,8 @@ import org.sonar.api.batch.sensor.measure.Measure;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.internal.apachecommons.codec.Charsets;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.command.CommandExecutor;
 
@@ -24,7 +25,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ColdfusionSensorTest {
 
-    private RulesProfile rulesProfile = RulesProfile.create(RulesProfile.SONAR_WAY_NAME, ColdFusionPlugin.LANGUAGE_NAME);
+    private ActiveRules rulesProfile = new ActiveRulesBuilder().build();
     private File baseDir = new File("src/test/resources").getAbsoluteFile();
     private SensorContextTester context = SensorContextTester.create(baseDir);
 
@@ -38,7 +39,7 @@ public class ColdfusionSensorTest {
         fileSystem.setWorkDir(tmpFolder.getRoot().toPath());
 
         context.setFileSystem(fileSystem);
-        context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(6, 7), SonarQubeSide.SCANNER));
+        context.setRuntime(SonarRuntimeImpl.forSonarQube(Version.create(7, 6), SonarQubeSide.SCANNER));
 
         context.settings().appendProperty("sonar.projectBaseDir", baseDir.getPath());
         addFilesToFs();
