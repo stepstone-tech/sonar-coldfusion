@@ -17,8 +17,7 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.ActiveRule;
+import org.sonar.api.batch.rule.ActiveRule;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -27,18 +26,19 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Collection;
 
 public class CFlintConfigExporter {
 
-    private final RulesProfile ruleProfile;
+    private final Collection<ActiveRule> ruleProfiles;
     private final String repositoryKey;
 
-    public CFlintConfigExporter(RulesProfile ruleProfile) {
+    public CFlintConfigExporter(Collection ruleProfile) {
         this(ruleProfile, ColdFusionPlugin.REPOSITORY_KEY);
     }
 
-    public CFlintConfigExporter(RulesProfile ruleProfile, String repositoryKey) {
-        this.ruleProfile = ruleProfile;
+    public CFlintConfigExporter(Collection ruleProfile, String repositoryKey) {
+        this.ruleProfiles = ruleProfile;
         this.repositoryKey = repositoryKey;
     }
 
@@ -57,9 +57,9 @@ public class CFlintConfigExporter {
             xtw.writeStartDocument();
             xtw.writeStartElement("config");
 
-            for (ActiveRule activeRule : ruleProfile.getActiveRulesByRepository(repositoryKey)) {
+            for (ActiveRule activeRule : ruleProfiles) {
                 xtw.writeStartElement("includes");
-                xtw.writeAttribute("code", activeRule.getRuleKey());
+                xtw.writeAttribute("code", activeRule.ruleKey().toString());
                 xtw.writeEndElement();
             }
 

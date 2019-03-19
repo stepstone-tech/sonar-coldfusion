@@ -26,7 +26,7 @@ import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -38,6 +38,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -46,10 +47,10 @@ import java.util.concurrent.TimeUnit;
 public class ColdFusionSensor implements Sensor {
 
     private final FileSystem fs;
-    private final RulesProfile ruleProfile;
+    private final ActiveRules ruleProfile;
     private final Logger LOGGER = Loggers.get(ColdFusionSensor.class);
 
-    public ColdFusionSensor(FileSystem fs, RulesProfile ruleProfile) {
+    public ColdFusionSensor(FileSystem fs, ActiveRules ruleProfile) {
         Preconditions.checkNotNull(fs);
         Preconditions.checkNotNull(ruleProfile);
 
@@ -87,7 +88,7 @@ public class ColdFusionSensor implements Sensor {
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
         final File configFile = new File(fs.workDir(), "cflint-config.xml");
-        new CFlintConfigExporter(ruleProfile).save(configFile);
+        new CFlintConfigExporter(ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(configFile);
         return configFile;
     }
 
