@@ -28,6 +28,23 @@
 
         </cftry>
 
+        <cfset M0250 = 0>
+        <cfscript>
+            if (local.InfusionTherapy is 1)
+            {
+                M0250 = M0250 + 14;
+            }
+            if (local.ParentalNutrition is 1)
+            {
+                M0250 = M0250 + 20;
+            }
+            if (local.EnteralNutrition is 1)
+            {
+                M0250 = M0250 + 24;
+            }
+        </cfscript>
+
+
         <cfreturn local.resultStruct />
 
     </cffunction>

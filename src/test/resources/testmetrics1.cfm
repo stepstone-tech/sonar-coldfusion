@@ -8,3 +8,9 @@
 <!--- this is a second comment --->
         the world to see.
 </cfif>
+
+<cfif firstName eq "Nico">
+    Nico!
+<cfelse  >
+    the world to see.
+</cfif>
