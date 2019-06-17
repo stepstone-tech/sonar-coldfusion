@@ -8,7 +8,7 @@
     <packaging>sonar-plugin</packaging>
     <version>1.7.1-SNAPSHOT</version>
 
-    <name>SonarQube Coldfusion Analyzer</name>
+    <name>SonarQube Coldfusion Plugin</name>
     <description>Enables scanning of ColdFusion source files</description>
     <url>https://github.com/stepstone-tech/sonar-coldfusion</url>
 
@@ -41,9 +41,6 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.version>6.7.6</sonar.version>
         <cflint.version>1.4.1</cflint.version>
-        <sonar.projectKey>stepstone-tech_sonar-coldfusion</sonar.projectKey>
-        <sonar.organization>stepstone-tech</sonar.organization>
-        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
@@ -98,7 +95,7 @@
                     <pluginClass>com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin</pluginClass>
                     <pluginName>ColdFusion</pluginName>
                     <pluginDescription>CFLint ${cflint.version} Plugin for Sonarqube</pluginDescription>
-                    <pluginSourcesUrl>https://github.com/nbihan-mediware/sonar-coldfusion</pluginSourcesUrl>
+                    <pluginSourcesUrl>https://github.com/stepstone-tech/sonar-coldfusion</pluginSourcesUrl>
                 </configuration>
             </plugin>
             <plugin>
@@ -147,5 +144,49 @@
             </plugin>
         </plugins>
     </build>
-
+    <profiles>
+        <profile>
+        <id>sonar</id>
+        <properties>
+            <sonar.projectKey>stepstone-tech_sonar-coldfusion</sonar.projectKey>
+            <sonar.organization>stepstone-tech</sonar.organization>
+            <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        </properties>
+        <build>
+            <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <groupId>org.sonarsource.scanner.maven</groupId>
+                            <artifactId>sonar-maven-plugin</artifactId>
+                            <version>3.6.0.1398</version>
+                        </plugin>
+                    <plugin>
+                        <groupId>org.jacoco</groupId>
+                        <artifactId>jacoco-maven-plugin</artifactId>
+                        <version>0.8.3</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                <execution>
+                    <goals>
+                    <goal>prepare-agent</goal>
+                    </goals>
+                </execution>
+                <execution>
+                    <id>report</id>
+                    <goals>
+                    <goal>report</goal>
+                    </goals>
+                </execution>
+                </executions>
+            </plugin>
+            </plugins>
+        </build>
+        </profile>
+    </profiles>
 </project>
