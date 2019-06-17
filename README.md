@@ -64,6 +64,7 @@ the [repo](https://github.com/stepstone-tech/sonar-coldfusion).
 
 Many thanks for the people, who created or improved this project:
 
+ - Tomek Stec
  - Michał Paluchowski 
  - Nicolas Bihan
  
