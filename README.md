@@ -36,7 +36,7 @@ sonar.ce.javaOpts=-Xmx2g -Xms128m -XX:+HeapDumpOnOutOfMemoryError
 Run Maven goal
 
 ```bash
-mvn clean package de.jutzig:github-release-plugin:1.3.0:release 
+mvn clean package
 ```
 
 ## Releasing
