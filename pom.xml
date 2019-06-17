@@ -41,6 +41,9 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <sonar.version>6.7.6</sonar.version>
         <cflint.version>1.4.1</cflint.version>
+        <sonar.projectKey>stepstone-tech_sonar-coldfusion</sonar.projectKey>
+        <sonar.organization>stepstone-tech</sonar.organization>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
     </properties>
 
     <dependencies>
