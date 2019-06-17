@@ -25,14 +25,14 @@
     </licenses>
 
     <scm>
-        <connection>git@github.com:nbihan-mediware/sonar-coldfusion.git</connection>
-        <developerConnection>git@github.com:nbihan-mediware/sonar-coldfusion.git</developerConnection>
-        <url>https://github.com/nbihan-mediware/sonar-coldfusion</url>
-        <tag>HEAD</tag>
+        <connection>git@github.com:stepstone-tech/sonar-coldfusion.git</connection>
+        <developerConnection>git@github.com:stepstone-tech/sonar-coldfusion.git</developerConnection>
+        <url>https://github.com/stepstone-tech/sonar-coldfusion</url>
     </scm>
+    
     <issueManagement>
         <system>GitHub</system>
-        <url>https://github.com/nbihan-mediware/sonar-coldfusion/issues</url>
+        <url>https://github.com/stepstone-tech/sonar-coldfusion/issues</url>
     </issueManagement>
 
     <properties>

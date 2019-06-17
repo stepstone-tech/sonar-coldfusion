@@ -1,12 +1,9 @@
-package com.wellsky;
+package com.stepstone.sonar.plugin.coldfusion;
 
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionSensor;
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
-import org.mockito.Mockito;
 import org.sonar.api.SonarQubeSide;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
@@ -17,19 +14,13 @@ import org.sonar.api.batch.sensor.measure.Measure;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.internal.apachecommons.codec.Charsets;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.FileLinesContext;
-import org.sonar.api.measures.FileLinesContextFactory;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.command.CommandExecutor;
 
 import java.io.File;
-import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class ColdfusionSensorTest {
 

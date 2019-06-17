@@ -53,9 +53,18 @@ sonar.ce.javaOpts=-Xmx2g -Xms128m -XX:+HeapDumpOnOutOfMemoryError
 
 2GB might be enough, or perhaps your code base warrants more.
 
+## Contributors	
+
+Many thanks for the people, who created or improved this project:
+
+ - Michał Paluchowski 
+ - Nicolas Bihan
+ 
 ## License
 
-Based on StepStone GmbH [repo](https://github.com/stepstone-tech/sonar-coldfusion)
+Copyright 2016-2019 StepStone GmbH
+          and contibutors
+
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

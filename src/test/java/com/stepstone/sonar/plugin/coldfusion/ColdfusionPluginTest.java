@@ -1,6 +1,5 @@
-package com.wellsky;
+package com.stepstone.sonar.plugin.coldfusion;
 
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import org.junit.Assert;
 import org.junit.Test;
 import org.sonar.api.Plugin;

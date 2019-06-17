@@ -1,4 +1,4 @@
-package com.wellsky;
+package com.stepstone.sonar.plugin.coldfusion;
 
 public class OSValidator {
 
