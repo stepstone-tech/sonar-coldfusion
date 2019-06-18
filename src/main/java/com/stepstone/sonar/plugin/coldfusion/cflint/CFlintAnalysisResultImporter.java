@@ -41,7 +41,7 @@ public class CFlintAnalysisResultImporter {
     private final FileSystem fs;
     private final SensorContext sensorContext;
     private XMLStreamReader stream;
-    private final Logger LOGGER = Loggers.get(CFlintAnalysisResultImporter.class);
+    private final Logger logger = Loggers.get(CFlintAnalysisResultImporter.class);
 
     public CFlintAnalysisResultImporter(FileSystem fs, SensorContext sensorContext) {
         this.fs = fs;
@@ -53,7 +53,7 @@ public class CFlintAnalysisResultImporter {
         try (FileReader reader = new FileReader(file)) {
             parse(reader);
         } catch (XMLStreamException | IOException e) {
-            LOGGER.error("", e);
+            logger.error("", e);
             throw e;
         } finally {
             closeXmlStream();
@@ -61,7 +61,10 @@ public class CFlintAnalysisResultImporter {
     }
 
     private void parse(FileReader reader) throws XMLStreamException {
-        stream = XMLInputFactory.newInstance().createXMLStreamReader(reader);
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
+        factory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+        stream = factory.createXMLStreamReader(reader);
 
         parse();
     }
@@ -101,24 +104,25 @@ public class CFlintAnalysisResultImporter {
 
     private void createNewIssue(IssueAttributes issueAttributes, LocationAttributes locationAttributes, InputFile inputFile) {
         if(issueAttributes == null){
-            LOGGER.debug("Problem creating issue for file {} issueAttributes is null", inputFile);
+            logger.debug("Problem creating issue for file {} issueAttributes is null", inputFile);
         }
         if(locationAttributes == null){
-            LOGGER.debug("Problem creating issue for file {} locationAttributes is null", inputFile);
+            logger.debug("Problem creating issue for file {} locationAttributes is null", inputFile);
         }
         if(inputFile==null){
-            LOGGER.debug("Problem creating issue for file inputFile is null");
+            logger.debug("Problem creating issue for file inputFile is null");
         }
         if(issueAttributes == null || locationAttributes == null || inputFile == null){
             return;
         }
 
         if(locationAttributes.getLine().isPresent() && locationAttributes.getLine().get()>inputFile.lines()){
-            LOGGER.error("Problem creating issue for file {}, issue is line {} but file has {} lines", inputFile, locationAttributes.getLine().get(), inputFile.lines());
+            logger
+                .error("Problem creating issue for file {}, issue is line {} but file has {} lines", inputFile, locationAttributes.getLine().get(), inputFile.lines());
             return;
         }
 
-        LOGGER.debug("create New Issue {} for file {}", issueAttributes, inputFile.filename());
+        logger.debug("create New Issue {} for file {}", issueAttributes, inputFile.filename());
         final NewIssue issue = sensorContext.newIssue();
 
         final NewIssueLocation issueLocation = issue.newLocation();

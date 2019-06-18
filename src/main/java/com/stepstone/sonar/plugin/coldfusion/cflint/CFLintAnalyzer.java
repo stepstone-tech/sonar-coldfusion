@@ -48,15 +48,18 @@ public class CFLintAnalyzer {
     public void analyze(File configFile) throws IOException, XMLStreamException {
         File executableJar = null;
         try {
-            Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).get());
-
+            Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).orElseThrow(
+                IllegalStateException::new
+            ));
             addCflintJavaOpts(command);
             executableJar = extractCflintJar();
             command.addArgument("-jar")
                 .addArgument(executableJar.getPath())
                 .addArgument("-xml")
                 .addArgument("-folder")
-                .addArgument(settings.get("sonar.projectBaseDir").get())
+                .addArgument(settings.get("sonar.projectBaseDir").orElseThrow(
+                    IllegalStateException::new
+                ))
                 .addArgument("-xmlfile")
                 .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
                 .addArgument("-configfile")
@@ -82,14 +85,11 @@ public class CFLintAnalyzer {
     }
 
     protected void addCflintJavaOpts(Command command) {
-        if(settings.get(ColdFusionPlugin.CFLINT_JAVA_OPTS).isPresent()) {
-            final String cflintJavaOpts = settings.get(ColdFusionPlugin.CFLINT_JAVA_OPTS).get();
-
-            if (!Strings.isNullOrEmpty(cflintJavaOpts)) {
-                final String[] arguments = cflintJavaOpts.split(" ");
-                for (String argument : arguments) {
-                    command.addArgument(argument);
-                }
+        final String cflintJavaOpts = settings.get(ColdFusionPlugin.CFLINT_JAVA_OPTS).orElse("");
+        if (!Strings.isNullOrEmpty(cflintJavaOpts)) {
+            final String[] arguments = cflintJavaOpts.split(" ");
+            for (String argument : arguments) {
+                command.addArgument(argument);
             }
         }
     }
