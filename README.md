@@ -1,5 +1,5 @@
 # SonarQube ColdFusion Plugin
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=stepstone-tech_sonar-coldfusion&metric=alert_status)](https://sonarcloud.io/dashboard?id=stepstone-tech_sonar-coldfusion) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=stepstone-tech_sonar-coldfusion&metric=coverage)](https://sonarcloud.io/dashboard?id=stepstone-tech_sonar-coldfusion)
+[![Build Status](https://travis-ci.org/stepstone-tech/sonar-coldfusion.svg?branch=master)](https://travis-ci.org/stepstone-tech/sonar-coldfusion) [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=stepstone-tech_sonar-coldfusion&metric=alert_status)](https://sonarcloud.io/dashboard?id=stepstone-tech_sonar-coldfusion) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=stepstone-tech_sonar-coldfusion&metric=coverage)](https://sonarcloud.io/dashboard?id=stepstone-tech_sonar-coldfusion)
 
 A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, based on the [CFLint library](https://github.com/cflint/CFLint).
 

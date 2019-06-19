@@ -17,9 +17,9 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.cflint.xml;
 
 
-import com.google.common.base.Optional;
 import org.apache.commons.lang.StringUtils;
 
+import java.util.Optional;
 import javax.xml.stream.XMLStreamReader;
 
 class TagAttribute {
@@ -33,7 +33,7 @@ class TagAttribute {
             }
         }
 
-        return Optional.absent();
+        return Optional.empty();
     }
 
 
@@ -46,6 +46,6 @@ class TagAttribute {
             }
         }
 
-        return Integer.valueOf(0);
+        return 0;
     }
 }

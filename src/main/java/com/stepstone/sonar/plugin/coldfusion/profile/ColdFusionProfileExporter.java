@@ -16,14 +16,13 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.profile;
 
-import com.google.common.base.Throwables;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
+import com.stepstone.sonar.plugin.coldfusion.errors.ColdFusionPluginException;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 
 import javax.xml.stream.XMLStreamException;
-import java.io.IOException;
 import java.io.Writer;
 
 public class ColdFusionProfileExporter extends ProfileExporter {
@@ -37,9 +36,9 @@ public class ColdFusionProfileExporter extends ProfileExporter {
     public void exportProfile(RulesProfile ruleProfile, Writer writer) {
 
         try {
-            new CFlintConfigExporter(ruleProfile).save(writer);
-        } catch (IOException | XMLStreamException e) {
-            Throwables.propagate(e);
+            new CFLintConfigExporter(ruleProfile).save(writer);
+        } catch (XMLStreamException e) {
+            throw new ColdFusionPluginException("Could not export coldfusion-cflint profile", e);
         }
 
     }

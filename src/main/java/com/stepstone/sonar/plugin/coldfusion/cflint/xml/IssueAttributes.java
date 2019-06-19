@@ -16,8 +16,8 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint.xml;
 
-import com.google.common.base.Optional;
 
+import java.util.Optional;
 import javax.xml.stream.XMLStreamReader;
 
 public class IssueAttributes extends TagAttribute {

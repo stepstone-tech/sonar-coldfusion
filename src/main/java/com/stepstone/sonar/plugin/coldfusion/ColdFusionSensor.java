@@ -18,8 +18,8 @@ package com.stepstone.sonar.plugin.coldfusion;
 
 import com.google.common.base.Preconditions;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintAnalysisResultImporter;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -49,7 +49,7 @@ public class ColdFusionSensor implements Sensor {
 
     private final FileSystem fs;
     private final RulesProfile ruleProfile;
-    private final Logger LOGGER = Loggers.get(ColdFusionSensor.class);
+    private final Logger logger = Loggers.get(ColdFusionSensor.class);
 
     public ColdFusionSensor(FileSystem fs, RulesProfile ruleProfile) {
         Preconditions.checkNotNull(fs);
@@ -73,7 +73,7 @@ public class ColdFusionSensor implements Sensor {
             importResults(context);
             measureProcessor(context);
         } catch (IOException | XMLStreamException e) {
-            LOGGER.error("",e);
+            logger.error("", e);
         }
     }
 
@@ -89,28 +89,26 @@ public class ColdFusionSensor implements Sensor {
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
         final File configFile = new File(fs.workDir(), "cflint-config.xml");
-        new CFlintConfigExporter(ruleProfile).save(configFile);
+        new CFLintConfigExporter(ruleProfile).save(configFile);
         return configFile;
     }
 
     private void deleteFile(File configFile) throws IOException {
-        if(configFile!= null){
-           Files.deleteIfExists(configFile.toPath());
-        }
+        Files.deleteIfExists(configFile.toPath());
     }
 
     private void importResults(SensorContext sensorContext) throws IOException {
         try {
-            new CFlintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
+            new CFLintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
         } catch (XMLStreamException e) {
-            LOGGER.error(",e");
+            logger.error(",e");
         } finally {
             deleteFile(new File(fs.workDir(), "cflint-result.xml"));
         }
     }
 
     private void measureProcessor(SensorContext context) {
-        LOGGER.info("Starting measure processor");
+        logger.info("Starting measure processor");
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         List<Callable<Integer>> callableTasks = new ArrayList<>();
@@ -132,10 +130,10 @@ public class ColdFusionSensor implements Sensor {
             executorService.shutdown();
             executorService.awaitTermination(2, TimeUnit.MINUTES);
         } catch (InterruptedException e) {
-            LOGGER.error("",e);
+            logger.error("", e);
         }
 
-        LOGGER.info("Measure processor done");
+        logger.info("Measure processor done");
     }
 
     //Very basic and naive line of code counter for Coldfusion

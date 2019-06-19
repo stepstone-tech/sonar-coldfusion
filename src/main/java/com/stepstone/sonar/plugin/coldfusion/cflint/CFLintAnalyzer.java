@@ -34,7 +34,7 @@ import java.io.IOException;
 
 public class CFLintAnalyzer {
 
-    private final Logger LOGGER = Loggers.get(CFLintAnalyzer.class);
+    private final Logger logger = Loggers.get(CFLintAnalyzer.class);
     private final Configuration settings;
     private final FileSystem fs;
 
@@ -98,7 +98,7 @@ public class CFLintAnalyzer {
 
         @Override
         public void consumeLine(String line) {
-            LOGGER.info("Consuming line {}", line);
+            logger.info("Consuming line {}", line);
         }
 
     }
@@ -107,7 +107,7 @@ public class CFLintAnalyzer {
 
         @Override
         public void consumeLine(String line) {
-            LOGGER.error("Error consuming line {}",line);
+            logger.error("Error consuming line {}", line);
         }
     }
 

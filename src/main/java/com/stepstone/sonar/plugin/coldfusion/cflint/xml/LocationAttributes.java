@@ -17,8 +17,7 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.cflint.xml;
 
 
-import com.google.common.base.Optional;
-
+import java.util.Optional;
 import javax.xml.stream.XMLStreamReader;
 
 public class LocationAttributes extends TagAttribute {
@@ -31,13 +30,9 @@ public class LocationAttributes extends TagAttribute {
         file = getAttributeValue("file", stream).get();
         message = getAttributeValue("message", stream);
 
-        Optional<String> line = getAttributeValue("line", stream);
+        Optional<String> currentLine = getAttributeValue("line", stream);
 
-        if (line.isPresent()) {
-            this.line = Optional.of(Integer.parseInt(line.get()));
-        } else {
-            this.line = Optional.absent();
-        }
+        this.line = currentLine.map(Integer::parseInt);
     }
 
     public String getFile() {

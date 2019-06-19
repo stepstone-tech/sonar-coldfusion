@@ -28,16 +28,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-public class CFlintConfigExporter {
+public class CFLintConfigExporter {
 
     private final RulesProfile ruleProfile;
     private final String repositoryKey;
 
-    public CFlintConfigExporter(RulesProfile ruleProfile) {
+    public CFLintConfigExporter(RulesProfile ruleProfile) {
         this(ruleProfile, ColdFusionPlugin.REPOSITORY_KEY);
     }
 
-    public CFlintConfigExporter(RulesProfile ruleProfile, String repositoryKey) {
+    public CFLintConfigExporter(RulesProfile ruleProfile, String repositoryKey) {
         this.ruleProfile = ruleProfile;
         this.repositoryKey = repositoryKey;
     }
@@ -48,7 +48,7 @@ public class CFlintConfigExporter {
         }
     }
 
-    public void save(Writer writer) throws IOException, XMLStreamException {
+    public void save(Writer writer) throws XMLStreamException {
         final XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
         XMLStreamWriter xtw=null;
         try {

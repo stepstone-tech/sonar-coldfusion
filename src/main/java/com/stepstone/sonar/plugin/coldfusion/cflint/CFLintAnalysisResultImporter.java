@@ -36,14 +36,14 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class CFlintAnalysisResultImporter {
+public class CFLintAnalysisResultImporter {
 
     private final FileSystem fs;
     private final SensorContext sensorContext;
     private XMLStreamReader stream;
-    private final Logger logger = Loggers.get(CFlintAnalysisResultImporter.class);
+    private final Logger logger = Loggers.get(CFLintAnalysisResultImporter.class);
 
-    public CFlintAnalysisResultImporter(FileSystem fs, SensorContext sensorContext) {
+    public CFLintAnalysisResultImporter(FileSystem fs, SensorContext sensorContext) {
         this.fs = fs;
         this.sensorContext = sensorContext;
     }
