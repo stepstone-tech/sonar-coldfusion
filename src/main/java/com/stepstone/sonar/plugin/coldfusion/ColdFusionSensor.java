@@ -18,15 +18,15 @@ package com.stepstone.sonar.plugin.coldfusion;
 
 import com.google.common.base.Preconditions;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintAnalysisResultImporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.profiles.RulesProfile;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
@@ -38,20 +38,19 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class ColdFusionSensor implements Sensor {
 
     private final FileSystem fs;
-    private final RulesProfile ruleProfile;
-    private final Logger logger = Loggers.get(ColdFusionSensor.class);
+    private final ActiveRules ruleProfile;
+    private final Logger LOGGER = Loggers.get(ColdFusionSensor.class);
 
-    public ColdFusionSensor(FileSystem fs, RulesProfile ruleProfile) {
+    public ColdFusionSensor(FileSystem fs, ActiveRules ruleProfile) {
         Preconditions.checkNotNull(fs);
         Preconditions.checkNotNull(ruleProfile);
 
@@ -73,7 +72,7 @@ public class ColdFusionSensor implements Sensor {
             importResults(context);
             measureProcessor(context);
         } catch (IOException | XMLStreamException e) {
-            logger.error("", e);
+            LOGGER.error("",e);
         }
     }
 
@@ -89,26 +88,28 @@ public class ColdFusionSensor implements Sensor {
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
         final File configFile = new File(fs.workDir(), "cflint-config.xml");
-        new CFLintConfigExporter(ruleProfile).save(configFile);
+        new CFlintConfigExporter(ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(configFile);
         return configFile;
     }
 
     private void deleteFile(File configFile) throws IOException {
-        Files.deleteIfExists(configFile.toPath());
+        if(configFile!= null){
+           Files.deleteIfExists(configFile.toPath());
+        }
     }
 
     private void importResults(SensorContext sensorContext) throws IOException {
         try {
-            new CFLintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
+            new CFlintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
         } catch (XMLStreamException e) {
-            logger.error(",e");
+            LOGGER.error(",e");
         } finally {
             deleteFile(new File(fs.workDir(), "cflint-result.xml"));
         }
     }
 
     private void measureProcessor(SensorContext context) {
-        logger.info("Starting measure processor");
+        LOGGER.info("Starting measure processor");
 
         ExecutorService executorService = Executors.newSingleThreadExecutor();
         List<Callable<Integer>> callableTasks = new ArrayList<>();
@@ -116,7 +117,7 @@ public class ColdFusionSensor implements Sensor {
         for (InputFile inputFile : fs.inputFiles(fs.predicates().hasLanguage(ColdFusionPlugin.LANGUAGE_KEY))) {
             Callable<Integer> callableTask = () -> {
                 try {
-                    metricsCounter(inputFile, context);
+                    metricsLinesCounter(inputFile, context);
                     return 1;
                 } catch (IOException e) {
                     return 0;
@@ -130,27 +131,24 @@ public class ColdFusionSensor implements Sensor {
             executorService.shutdown();
             executorService.awaitTermination(2, TimeUnit.MINUTES);
         } catch (InterruptedException e) {
-            logger.error("", e);
+            LOGGER.error("",e);
         }
 
-        logger.info("Measure processor done");
+        LOGGER.info("Measure processor done");
     }
 
     //Very basic and naive line of code counter for Coldfusion
     //Might count a line of code as comment
-    private void metricsCounter(InputFile inputFile, SensorContext context) throws IOException {
+    private void metricsLinesCounter(InputFile inputFile, SensorContext context) throws IOException {
         String currentLine;
         int commentLines = 0;
         int blankLines = 0;
         int lines = 0;
-        int complexity = 1;
-
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.inputStream()))) {
             if (inputFile.inputStream() != null) {
                 while ((currentLine = reader.readLine()) != null) {
                     lines++;
-
                     if (currentLine.contains("<!--")) {
                         commentLines++;
                         if (currentLine.contains("-->")) {
@@ -164,59 +162,14 @@ public class ColdFusionSensor implements Sensor {
                         }
                     } else if (currentLine.trim().isEmpty()) {
                         blankLines++;
-                        continue;
                     }
-
-                    complexity = getLineComplexity(currentLine, complexity);
                 }
             }
         }
-        int linesOfCode = lines-blankLines-commentLines;
-        // every 100 lines of code add 1 to the content's complexity
-        complexity = complexity + (linesOfCode / 100);
-
         context.<Integer>newMeasure().forMetric(CoreMetrics.COMMENT_LINES).on(inputFile).withValue(commentLines).save();
-        context.<Integer>newMeasure().forMetric(CoreMetrics.NCLOC).on(inputFile).withValue(linesOfCode).save();
+        context.<Integer>newMeasure().forMetric(CoreMetrics.NCLOC).on(inputFile).withValue(lines-blankLines-commentLines).save();
         context.<Integer>newMeasure().forMetric(CoreMetrics.LINES).on(inputFile).withValue(lines).save();
-        context.<Integer>newMeasure().forMetric(CoreMetrics.COMPLEXITY).on(inputFile).withValue(complexity).save();
     }
 
-    private int getLineComplexity(String currentLine, int complexity) {
-        int mcCabeComplexity =0;
-        int lineByLineComplexity = 0;
-        int lineByLineComplexityIncrement = 4;
-        int thisLineComplexityAdd = 0;
-        int thisLineComplexitySubtract = 0;
-
-        // SCORE INCREMENTS
-        mcCabeComplexity += countRegexOccurrences(currentLine, "(<cfif\\s|<cfelseif\\s|<cfcase\\s|<cfloop\\s|<cfoutput\\s*query|iif\\s*\\()");
-        mcCabeComplexity += countRegexOccurrences(currentLine, "(\\b(if|for|while|do|foreach)\\s*\\(|\\scase\\s+[\\w\"\"\\s]+:)");
-
-        thisLineComplexityAdd = countRegexOccurrences(currentLine, "(<cfif\\s|<cfelseif\\s|<cfcase\\s|<cfloop\\s|<cfoutput\\s*query|\\biif\\s*\\()") * lineByLineComplexityIncrement;
-        // TODO: account for script {braces} as well as non-braced if(?)do;else do;
-        // The current implementation just counts any opening and closing braces. That's Cheating (and gives inaccurate readings).
-        thisLineComplexityAdd += countRegexOccurrences(currentLine,"\\{") * lineByLineComplexityIncrement;
-
-        lineByLineComplexity += thisLineComplexityAdd;
-
-        // SCORE DECREMENTS
-        // Assume iif closes itself on the same line it opens
-        thisLineComplexitySubtract = (currentLine.split("(</cfif|</cfcase|</cfloop|iif\\s*\\()").length  - 1) * lineByLineComplexityIncrement;
-        thisLineComplexitySubtract += countRegexOccurrences(currentLine,"\\}") * lineByLineComplexityIncrement;
-        lineByLineComplexity -=  thisLineComplexitySubtract;
-
-        complexity += mcCabeComplexity + lineByLineComplexity;
-        return complexity;
-    }
-
-    private int countRegexOccurrences(String str, String regex) {
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(str);
-        int matches = 0;
-        while (matcher.find()) {
-            matches = matches + 1;
-        }
-        return matches;
-    }
 }
 
