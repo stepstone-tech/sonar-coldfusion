@@ -18,8 +18,8 @@ package com.stepstone.sonar.plugin.coldfusion;
 
 import com.google.common.base.Preconditions;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintAnalysisResultImporter;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -88,7 +88,7 @@ public class ColdFusionSensor implements Sensor {
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
         final File configFile = new File(fs.workDir(), "cflint-config.xml");
-        new CFlintConfigExporter(ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(configFile);
+        new CFLintConfigExporter(ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(configFile);
         return configFile;
     }
 
@@ -100,7 +100,7 @@ public class ColdFusionSensor implements Sensor {
 
     private void importResults(SensorContext sensorContext) throws IOException {
         try {
-            new CFlintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
+            new CFLintAnalysisResultImporter(fs, sensorContext).parse(new File(fs.workDir(), "cflint-result.xml"));
         } catch (XMLStreamException e) {
             LOGGER.error(",e");
         } finally {

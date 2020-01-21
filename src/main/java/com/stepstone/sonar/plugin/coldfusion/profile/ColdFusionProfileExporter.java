@@ -18,7 +18,7 @@ package com.stepstone.sonar.plugin.coldfusion.profile;
 
 import com.google.common.base.Throwables;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintConfigExporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
 import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.profiles.RulesProfile;
@@ -37,7 +37,7 @@ public class ColdFusionProfileExporter extends ProfileExporter {
     @Override
     public void exportProfile(RulesProfile ruleProfile, Writer writer) {
         try {
-            new CFlintConfigExporter(ruleProfile.getActiveRulesByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(writer);
+            new CFLintConfigExporter(ruleProfile.getActiveRulesByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(writer);
         } catch (IOException | XMLStreamException e) {
             Throwables.propagate(e);
         }
@@ -45,7 +45,7 @@ public class ColdFusionProfileExporter extends ProfileExporter {
 
     public void exportProfile(ActiveRules activeRules, Writer writer) {
         try {
-            new CFlintConfigExporter(activeRules.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(writer);
+            new CFLintConfigExporter(activeRules.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(writer);
         } catch (IOException | XMLStreamException e) {
             Throwables.propagate(e);
         }

@@ -1,4 +1,4 @@
-package com.wellsky;
+package com.stepstone.sonar.plugin.coldfusion;
 
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionSensor;
@@ -74,7 +74,7 @@ public class ColdfusionSensorTest {
             nloc+=measureNloc.value();
             comments+=measureComment.value();
         }
-        assertThat(nloc).isEqualTo(36);
+        assertThat(nloc).isEqualTo(56);
         assertThat(comments).isEqualTo(9);
 
     }

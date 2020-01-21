@@ -28,16 +28,16 @@ import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
 
-public class CFlintConfigExporter {
+public class CFLintConfigExporter {
 
     private final Collection<ActiveRule> ruleProfiles;
     private final String repositoryKey;
 
-    public CFlintConfigExporter(Collection ruleProfile) {
+    public CFLintConfigExporter(Collection ruleProfile) {
         this(ruleProfile, ColdFusionPlugin.REPOSITORY_KEY);
     }
 
-    public CFlintConfigExporter(Collection ruleProfile, String repositoryKey) {
+    public CFLintConfigExporter(Collection ruleProfile, String repositoryKey) {
         this.ruleProfiles = ruleProfile;
         this.repositoryKey = repositoryKey;
     }
