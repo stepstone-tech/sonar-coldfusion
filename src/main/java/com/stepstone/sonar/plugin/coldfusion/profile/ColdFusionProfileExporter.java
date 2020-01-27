@@ -16,16 +16,18 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.profile;
 
-import com.google.common.base.Throwables;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
-import org.sonar.api.profiles.ProfileExporter;
+
+import com.google.common.base.Throwables;
+
 import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.profiles.ProfileExporter;
 import org.sonar.api.profiles.RulesProfile;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 import java.io.Writer;
+import javax.xml.stream.XMLStreamException;
 
 public class ColdFusionProfileExporter extends ProfileExporter {
 

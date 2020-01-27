@@ -16,6 +16,8 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
+import static com.google.common.base.Preconditions.checkNotNull;
+
 import org.sonar.api.batch.InstantiationStrategy;
 
 import java.io.File;
@@ -23,8 +25,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 @InstantiationStrategy(InstantiationStrategy.PER_BATCH)
 public class CFLintExtractor {

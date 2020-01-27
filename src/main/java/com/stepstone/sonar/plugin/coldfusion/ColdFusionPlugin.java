@@ -19,6 +19,7 @@ package com.stepstone.sonar.plugin.coldfusion;
 import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionProfileExporter;
 import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionSonarWayProfileImporter;
 import com.stepstone.sonar.plugin.coldfusion.rules.ColdFusionSonarRulesDefinition;
+
 import org.sonar.api.Plugin;
 import org.sonar.api.Properties;
 import org.sonar.api.Property;

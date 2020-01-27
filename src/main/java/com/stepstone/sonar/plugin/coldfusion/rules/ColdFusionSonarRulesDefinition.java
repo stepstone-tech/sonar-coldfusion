@@ -16,15 +16,15 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.rules;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
+
 import org.sonar.api.batch.ScannerSide;
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
-import org.sonar.squidbridge.rules.SqaleXmlLoader;
 
 import java.io.InputStreamReader;
-
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 @ScannerSide
 public class ColdFusionSonarRulesDefinition implements RulesDefinition {

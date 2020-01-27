@@ -16,9 +16,11 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
+import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
+
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
@@ -28,9 +30,9 @@ import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.File;
 import java.io.IOException;
+import javax.xml.stream.XMLStreamException;
 
 public class CFLintAnalyzer {
 

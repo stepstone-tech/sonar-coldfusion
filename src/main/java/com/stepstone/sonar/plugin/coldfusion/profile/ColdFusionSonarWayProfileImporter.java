@@ -17,6 +17,7 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.profile;
 
 import com.google.common.base.Charsets;
+
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.profiles.XMLProfileParser;

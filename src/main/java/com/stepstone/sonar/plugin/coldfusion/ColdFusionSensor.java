@@ -16,21 +16,22 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion;
 
-import com.google.common.base.Preconditions;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
+
+import com.google.common.base.Preconditions;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import javax.xml.stream.XMLStreamException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -38,13 +39,13 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.xml.stream.XMLStreamException;
 
 public class ColdFusionSensor implements Sensor {
 

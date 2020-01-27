@@ -19,6 +19,7 @@ package com.stepstone.sonar.plugin.coldfusion.cflint;
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.IssueAttributes;
 import com.stepstone.sonar.plugin.coldfusion.cflint.xml.LocationAttributes;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -28,13 +29,13 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
 
 public class CFLintAnalysisResultImporter {
 
