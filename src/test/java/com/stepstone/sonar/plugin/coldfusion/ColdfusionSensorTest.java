@@ -68,15 +68,18 @@ public class ColdfusionSensorTest {
 
         Integer nloc = 0;
         Integer comments = 0;
+        Integer complexity = 0;
         for (InputFile o : context.fileSystem().inputFiles()) {
             Measure<Integer> measureNloc = context.measure(o.key(),CoreMetrics.NCLOC.key());
             Measure<Integer> measureComment = context.measure(o.key(),CoreMetrics.COMMENT_LINES.key());
+            Measure<Integer> measureComplexity = context.measure(o.key(),CoreMetrics.COMPLEXITY.key());
             nloc+=measureNloc.value();
             comments+=measureComment.value();
+            complexity+=measureComplexity.value();
         }
         assertThat(nloc).isEqualTo(56);
         assertThat(comments).isEqualTo(9);
-
+        assertThat(complexity).isEqualTo(10);
     }
 
     private void addFilesToFs() {

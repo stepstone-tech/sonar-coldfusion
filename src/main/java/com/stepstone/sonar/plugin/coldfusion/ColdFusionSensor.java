@@ -43,6 +43,8 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class ColdFusionSensor implements Sensor {
 
@@ -144,6 +146,7 @@ public class ColdFusionSensor implements Sensor {
         int commentLines = 0;
         int blankLines = 0;
         int lines = 0;
+        int complexity = 1;
 
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.inputStream()))) {
             if (inputFile.inputStream() != null) {
@@ -163,12 +166,58 @@ public class ColdFusionSensor implements Sensor {
                     } else if (currentLine.trim().isEmpty()) {
                         blankLines++;
                     }
+
+                    complexity = getLineComplexity(currentLine, complexity);
                 }
             }
         }
+        int linesOfCode = lines-blankLines-commentLines;
+        // every 100 lines of code add 1 to the content's complexity
+        complexity = complexity + (linesOfCode / 100);
+
+
         context.<Integer>newMeasure().forMetric(CoreMetrics.COMMENT_LINES).on(inputFile).withValue(commentLines).save();
-        context.<Integer>newMeasure().forMetric(CoreMetrics.NCLOC).on(inputFile).withValue(lines-blankLines-commentLines).save();
+        context.<Integer>newMeasure().forMetric(CoreMetrics.NCLOC).on(inputFile).withValue(linesOfCode).save();
         context.<Integer>newMeasure().forMetric(CoreMetrics.LINES).on(inputFile).withValue(lines).save();
+        context.<Integer>newMeasure().forMetric(CoreMetrics.COMPLEXITY).on(inputFile).withValue(complexity).save();
+    }
+
+    private int getLineComplexity(String currentLine, int complexity) {
+        int mcCabeComplexity =0;
+        int lineByLineComplexity = 0;
+        int lineByLineComplexityIncrement = 4;
+        int thisLineComplexityAdd = 0;
+        int thisLineComplexitySubtract = 0;
+
+        // SCORE INCREMENTS
+        mcCabeComplexity += countRegexOccurrences(currentLine, "(<cfif\\s|<cfelseif\\s|<cfcase\\s|<cfloop\\s|<cfoutput\\s*query|iif\\s*\\()");
+        mcCabeComplexity += countRegexOccurrences(currentLine, "(\\b(if|for|while|do|foreach)\\s*\\(|\\scase\\s+[\\w\"\"\\s]+:)");
+
+        thisLineComplexityAdd = countRegexOccurrences(currentLine, "(<cfif\\s|<cfelseif\\s|<cfcase\\s|<cfloop\\s|<cfoutput\\s*query|\\biif\\s*\\()") * lineByLineComplexityIncrement;
+        // TODO: account for script {braces} as well as non-braced if(?)do;else do;
+        // The current implementation just counts any opening and closing braces. That's Cheating (and gives inaccurate readings).
+        thisLineComplexityAdd += countRegexOccurrences(currentLine,"\\{") * lineByLineComplexityIncrement;
+
+        lineByLineComplexity += thisLineComplexityAdd;
+
+        // SCORE DECREMENTS
+        // Assume iif closes itself on the same line it opens
+        thisLineComplexitySubtract = (currentLine.split("(</cfif|</cfcase|</cfloop|iif\\s*\\()").length  - 1) * lineByLineComplexityIncrement;
+        thisLineComplexitySubtract += countRegexOccurrences(currentLine,"\\}") * lineByLineComplexityIncrement;
+        lineByLineComplexity -=  thisLineComplexitySubtract;
+
+        complexity += mcCabeComplexity + lineByLineComplexity;
+        return complexity;
+    }
+
+    private int countRegexOccurrences(String str, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        int matches = 0;
+        while (matcher.find()) {
+            matches = matches + 1;
+        }
+        return matches;
     }
 
 }
