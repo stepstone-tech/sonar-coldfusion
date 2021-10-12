@@ -16,28 +16,44 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.profile;
 
-import com.google.common.base.Charsets;
+import com.google.common.base.Throwables;
+import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
+import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
-import org.sonar.api.profiles.ProfileDefinition;
-import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.profiles.XMLProfileParser;
-import org.sonar.api.utils.ValidationMessages;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.InputStream;
 
-import java.io.InputStreamReader;
-
-public class ColdFusionSonarWayProfileImporter extends ProfileDefinition {
+public class ColdFusionSonarWayProfileImporter implements BuiltInQualityProfilesDefinition {
 
     private static final String DEFAULT_PROFILE_PATH = "/com/stepstone/sonar/plugin/coldfusion/profile.xml";
 
-    private final XMLProfileParser xmlParser;
-
-    public ColdFusionSonarWayProfileImporter(XMLProfileParser xmlParser) {
-        this.xmlParser = xmlParser;
-    }
 
     @Override
-    public RulesProfile createProfile(ValidationMessages validation) {
-        return xmlParser.parse(new InputStreamReader(getClass().getResourceAsStream(DEFAULT_PROFILE_PATH), Charsets.UTF_8), validation);
+    public void define(Context context) {
+        final NewBuiltInQualityProfile profile = context.createBuiltInQualityProfile(
+            "Sonar Way", ColdFusionPlugin.LANGUAGE_NAME
+        );
+        try (final InputStream rulesXml = this.getClass().getClassLoader().getResourceAsStream(DEFAULT_PROFILE_PATH)){
+            final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            final DocumentBuilder builder = factory.newDocumentBuilder();
+            final Document xmlDoc = builder.parse(rulesXml);
+            final NodeList nodes = xmlDoc.getElementsByTagName("key");
+            for (int i = 0; i < nodes.getLength(); i++) {
+                final Node node = nodes.item(i);
+                final String key = node.getTextContent();
+                profile.activateRule(ColdFusionPlugin.REPOSITORY_KEY, key);
+            }
+        }catch (Exception e){
+            Throwables.propagate(e);
+        }
+
+        profile.done();
     }
 
+    public ColdFusionSonarWayProfileImporter() {
+    }
 }
