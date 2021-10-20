@@ -9,7 +9,7 @@ A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, b
 1. Copy `sonar-coldfusion-plugin-{version}.jar` to `<sonarqube dir>/extensions/plugins`.
 1. Restart SonarQube.
 
-# Compatibility
+## Compatibility
 
 SonarQube Version | Plugin Version
 ------------------|---------------
