@@ -9,6 +9,13 @@ A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, b
 1. Copy `sonar-coldfusion-plugin-{version}.jar` to `<sonarqube dir>/extensions/plugins`.
 1. Restart SonarQube.
 
+# Compatibility
+
+SonarQube Version | Plugin Version
+------------------|---------------
+7.6 - 7.9         | 2.2.1
+5.6 - 7.5         | 1.5.0
+
 ## Running
 
 Follow the instructions for [analyzing code with SonarQube Scanner](http://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner). The ColdFusion plugin will automatically discover and analyze `.cfc` and `.cfm` files.
