@@ -17,17 +17,16 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
 import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-
 import org.sonar.api.batch.rule.ActiveRule;
 
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 
 public class CFLintConfigExporter {
 
