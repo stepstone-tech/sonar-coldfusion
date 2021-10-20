@@ -16,22 +16,21 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion;
 
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
-
 import com.google.common.base.Preconditions;
-
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.batch.rule.ActiveRules;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import javax.xml.stream.XMLStreamException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
@@ -39,13 +38,13 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Collection;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import javax.xml.stream.XMLStreamException;
 
 public class ColdFusionSensor implements Sensor {
 
@@ -120,7 +119,7 @@ public class ColdFusionSensor implements Sensor {
         for (InputFile inputFile : fs.inputFiles(fs.predicates().hasLanguage(ColdFusionPlugin.LANGUAGE_KEY))) {
             Callable<Integer> callableTask = () -> {
                 try {
-                    metricsLinesCounter(inputFile, context);
+                    metricsCounter(inputFile, context);
                     return 1;
                 } catch (IOException e) {
                     return 0;
@@ -142,17 +141,19 @@ public class ColdFusionSensor implements Sensor {
 
     //Very basic and naive line of code counter for Coldfusion
     //Might count a line of code as comment
-    private void metricsLinesCounter(InputFile inputFile, SensorContext context) throws IOException {
+    private void metricsCounter(InputFile inputFile, SensorContext context) throws IOException {
         String currentLine;
         int commentLines = 0;
         int blankLines = 0;
         int lines = 0;
         int complexity = 1;
 
+
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(inputFile.inputStream()))) {
             if (inputFile.inputStream() != null) {
                 while ((currentLine = reader.readLine()) != null) {
                     lines++;
+
                     if (currentLine.contains("<!--")) {
                         commentLines++;
                         if (currentLine.contains("-->")) {
@@ -166,6 +167,7 @@ public class ColdFusionSensor implements Sensor {
                         }
                     } else if (currentLine.trim().isEmpty()) {
                         blankLines++;
+                        continue;
                     }
 
                     complexity = getLineComplexity(currentLine, complexity);
@@ -175,7 +177,6 @@ public class ColdFusionSensor implements Sensor {
         int linesOfCode = lines-blankLines-commentLines;
         // every 100 lines of code add 1 to the content's complexity
         complexity = complexity + (linesOfCode / 100);
-
 
         context.<Integer>newMeasure().forMetric(CoreMetrics.COMMENT_LINES).on(inputFile).withValue(commentLines).save();
         context.<Integer>newMeasure().forMetric(CoreMetrics.NCLOC).on(inputFile).withValue(linesOfCode).save();
@@ -220,6 +221,5 @@ public class ColdFusionSensor implements Sensor {
         }
         return matches;
     }
-
 }
 

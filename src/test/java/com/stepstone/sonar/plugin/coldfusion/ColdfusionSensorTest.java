@@ -1,7 +1,5 @@
 package com.stepstone.sonar.plugin.coldfusion;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,17 +9,19 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
-import org.sonar.api.batch.rule.ActiveRules;
-import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
 import org.sonar.api.batch.sensor.measure.Measure;
 import org.sonar.api.internal.SonarRuntimeImpl;
 import org.sonar.api.internal.apachecommons.codec.Charsets;
 import org.sonar.api.measures.CoreMetrics;
+import org.sonar.api.batch.rule.ActiveRules;
+import org.sonar.api.batch.rule.internal.ActiveRulesBuilder;
 import org.sonar.api.utils.Version;
 import org.sonar.api.utils.command.CommandExecutor;
 
 import java.io.File;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class ColdfusionSensorTest {
 
@@ -71,6 +71,7 @@ public class ColdfusionSensorTest {
         assertThat(nloc).isEqualTo(56);
         assertThat(comments).isEqualTo(9);
         assertThat(complexity).isEqualTo(10);
+
     }
 
     private void addFilesToFs() {
