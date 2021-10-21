@@ -197,6 +197,11 @@
                     <goals>
                     <goal>report</goal>
                     </goals>
+                    <configuration>
+                        <excludes>
+                            <exclude>META-INF/runner/cflint.jar</exclude>
+                        </excludes>
+                    </configuration>
                 </execution>
                 </executions>
             </plugin>
