@@ -43,13 +43,4 @@ public class ColdFusionProfileExporter extends ProfileExporter {
         }
     }
 
-    public void exportProfile(ActiveRules activeRules, Writer writer) {
-        try {
-            new CFLintConfigExporter(activeRules.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(writer);
-        } catch (IOException | XMLStreamException e) {
-            Throwables.propagate(e);
-        }
-
-    }
-
 }
