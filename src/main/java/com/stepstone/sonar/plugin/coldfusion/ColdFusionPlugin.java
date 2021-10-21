@@ -17,7 +17,7 @@ limitations under the License.
 package com.stepstone.sonar.plugin.coldfusion;
 
 import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionProfileExporter;
-import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionSonarWayProfileImporter;
+import com.stepstone.sonar.plugin.coldfusion.profile.ColdFusionSonarWayProfile;
 import com.stepstone.sonar.plugin.coldfusion.rules.ColdFusionSonarRulesDefinition;
 
 import org.sonar.api.Plugin;
@@ -71,7 +71,7 @@ public class ColdFusionPlugin implements Plugin {
                 ColdFusion.class,
                 ColdFusionSensor.class,
                 ColdFusionSonarRulesDefinition.class,
-                ColdFusionSonarWayProfileImporter.class,
+                ColdFusionSonarWayProfile.class,
                 ColdFusionProfileExporter.class
         );
 

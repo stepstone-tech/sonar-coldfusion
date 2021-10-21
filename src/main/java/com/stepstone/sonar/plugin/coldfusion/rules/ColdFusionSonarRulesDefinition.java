@@ -44,7 +44,6 @@ public class ColdFusionSonarRulesDefinition implements RulesDefinition {
                 .setName(ColdFusionPlugin.REPOSITORY_NAME);
 
         rulesLoader.load(repository, new InputStreamReader(getClass().getResourceAsStream(DEFAULT_RULES_FILE), UTF_8));
-        //SqaleXmlLoader.load(repository, DEFAULT_SQUALE_FILE);
 
         repository.done();
     }

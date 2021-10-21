@@ -37,14 +37,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ColdFusionSensor implements Sensor {
 
@@ -90,7 +91,9 @@ public class ColdFusionSensor implements Sensor {
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
         final File configFile = new File(fs.workDir(), "cflint-config.xml");
-        new CFLintConfigExporter(ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)).save(configFile);
+        Collection<String> ruleKeys = ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)
+            .stream().map(rule -> rule.ruleKey().toString()).collect(Collectors.toList());
+        new CFLintConfigExporter(ruleKeys).save(configFile);
         return configFile;
     }
 

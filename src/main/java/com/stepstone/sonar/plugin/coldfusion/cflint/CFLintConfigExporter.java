@@ -16,9 +16,6 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import org.sonar.api.batch.rule.ActiveRule;
-
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
@@ -30,16 +27,9 @@ import java.util.Collection;
 
 public class CFLintConfigExporter {
 
-    private final Collection<ActiveRule> ruleProfiles;
-    private final String repositoryKey;
-
-    public CFLintConfigExporter(Collection ruleProfile) {
-        this(ruleProfile, ColdFusionPlugin.REPOSITORY_KEY);
-    }
-
-    public CFLintConfigExporter(Collection ruleProfile, String repositoryKey) {
-        this.ruleProfiles = ruleProfile;
-        this.repositoryKey = repositoryKey;
+    private final Collection<String> ruleKeys;
+    public CFLintConfigExporter(Collection<String> ruleKeys) {
+        this.ruleKeys = ruleKeys;
     }
 
     public void save(File configFile) throws IOException, XMLStreamException {
@@ -57,9 +47,9 @@ public class CFLintConfigExporter {
             xtw.writeStartDocument();
             xtw.writeStartElement("config");
 
-            for (ActiveRule activeRule : ruleProfiles) {
+            for (String ruleKey: ruleKeys) {
                 xtw.writeStartElement("includes");
-                xtw.writeAttribute("code", activeRule.ruleKey().toString());
+                xtw.writeAttribute("code", ruleKey);
                 xtw.writeEndElement();
             }
 
