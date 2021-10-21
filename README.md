@@ -13,7 +13,8 @@ A [SonarQube plugin](http://www.sonarqube.org/) for analyzing ColdFusion code, b
 
 SonarQube Version | Plugin Version
 ------------------|---------------
-7.6 - 8.9         | 2.2.1
+9.0 - 9.1         | 2.2.0
+7.6 - 8.9         | 2.1.1
 5.6 - 7.5         | 1.5.0
 
 ## Running
