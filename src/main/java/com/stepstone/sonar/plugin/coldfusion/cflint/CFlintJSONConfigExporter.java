@@ -16,19 +16,18 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
 
-public class CFLintConfigExporter {
+import javax.xml.stream.XMLStreamException;
+
+public class CFlintJSONConfigExporter {
 
     private final Collection<String> ruleKeys;
-    public CFLintConfigExporter(Collection<String> ruleKeys) {
+    public CFlintJSONConfigExporter(Collection<String> ruleKeys) {
         this.ruleKeys = ruleKeys;
     }
 
@@ -39,27 +38,17 @@ public class CFLintConfigExporter {
     }
 
     public void save(Writer writer) throws IOException, XMLStreamException {
-        final XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newInstance();
-        XMLStreamWriter xtw=null;
-        try {
-            xtw = xmlOutputFactory.createXMLStreamWriter(writer);
+        writer.append("{ \"includes\": [");
 
-            xtw.writeStartDocument();
-            xtw.writeStartElement("config");
+        boolean first = true;
+        for (String ruleKey : ruleKeys) {
+            if (first) first=false;
+            else writer.append(",");
 
-            for (String ruleKey: ruleKeys) {
-                xtw.writeStartElement("includes");
-                xtw.writeAttribute("code", ruleKey);
-                xtw.writeEndElement();
-            }
-
-            xtw.writeEndElement();
-            xtw.writeEndDocument();
-        } finally {
-            if(xtw!=null) {
-                xtw.close();
-            }
+            writer.append(" {\"code\":\"" + ruleKey + "\"}");
         }
 
+        writer.append(" ] }");
+        writer.close();
     }
 }

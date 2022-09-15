@@ -6,7 +6,7 @@
     <groupId>com.stepstone.sonar.plugin</groupId>
     <artifactId>sonar-coldfusion-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>2.2.0</version>
+    <version>2.3.0</version>
 
     <name>SonarQube Coldfusion Plugin</name>
     <description>Enables scanning of ColdFusion source files</description>
@@ -97,6 +97,12 @@
             <version>${sonar.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.cflint</groupId>
+            <artifactId>CFLint</artifactId>
+            <version>${cflint.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -112,32 +118,6 @@
                     <pluginDescription>CFLint ${cflint.version} Plugin for Sonarqube</pluginDescription>
                     <pluginSourcesUrl>https://github.com/stepstone-tech/sonar-coldfusion</pluginSourcesUrl>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>include-cflint</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.github.cflint</groupId>
-                                    <artifactId>CFLint</artifactId>
-                                    <version>${cflint.version}</version>
-                                    <classifier>all</classifier>
-                                    <destFileName>cflint.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.outputDirectory}/META-INF/runner</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <groupId>de.jutzig</groupId>
