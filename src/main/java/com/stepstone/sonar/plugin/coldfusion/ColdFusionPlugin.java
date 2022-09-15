@@ -74,6 +74,5 @@ public class ColdFusionPlugin implements Plugin {
                 ColdFusionSonarWayProfile.class,
                 ColdFusionProfileExporter.class
         );
-
     }
 }

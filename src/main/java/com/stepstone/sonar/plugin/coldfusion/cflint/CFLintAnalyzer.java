@@ -16,23 +16,38 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.cflint;
 
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
-import com.google.common.base.Preconditions;
-import com.google.common.base.Strings;
+import javax.xml.stream.XMLStreamException;
 
 import org.sonar.api.batch.fs.FileSystem;
+import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.config.Configuration;
 import org.sonar.api.utils.command.Command;
-import org.sonar.api.utils.command.CommandExecutor;
 import org.sonar.api.utils.command.StreamConsumer;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.File;
-import java.io.IOException;
-import javax.xml.stream.XMLStreamException;
+import com.cflint.api.CFLintAPI;
+import com.cflint.api.CFLintResult;
+import com.cflint.config.CFLintConfiguration;
+import com.cflint.config.CFLintPluginInfo;
+import com.cflint.config.ConfigBuilder;
+import com.cflint.exception.CFLintConfigurationException;
+import com.cflint.exception.CFLintScanException;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Strings;
+import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
 
 public class CFLintAnalyzer {
 
@@ -50,29 +65,62 @@ public class CFLintAnalyzer {
     public void analyze(File configFile) throws IOException, XMLStreamException {
         File executableJar = null;
         try {
-            Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).orElseThrow(
-                IllegalStateException::new
-            ));
-            addCflintJavaOpts(command);
-            executableJar = extractCflintJar();
-            command.addArgument("-jar")
-                .addArgument(executableJar.getPath())
-                .addArgument("-xml")
-                .addArgument("-folder")
-                .addArgument(settings.get("sonar.projectBaseDir").orElseThrow(
-                    IllegalStateException::new
-                ))
-                .addArgument("-xmlfile")
-                .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
-                .addArgument("-configfile")
-                .addArgument(configFile.getPath());
+            // Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).orElseThrow(
+            //     IllegalStateException::new
+            // ));
+            // addCflintJavaOpts(command);
+            // executableJar = extractCflintJar();
 
-            CommandExecutor executor = CommandExecutor.create();
-            int exitCode = executor.execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
+            List<String> filesToScan = new ArrayList<>();
 
-            if (exitCode != 0) {
-                throw new IllegalStateException("The CFLint analyzer failed with exit code: " + exitCode);
-            }
+            for (InputFile file : fs.inputFiles(fs.predicates().hasLanguage(ColdFusionPlugin.LANGUAGE_KEY)))
+                filesToScan.add(file.absolutePath());
+            
+            try {
+                ConfigBuilder cflintConfigBuilder = new ConfigBuilder(new CFLintPluginInfo());
+                cflintConfigBuilder.addCustomConfig(configFile.getPath());
+
+                CFLintAPI linter = new CFLintAPI(
+                    cflintConfigBuilder.build()
+                );
+                linter.setVerbose(true);
+
+                CFLintResult lintResult = linter.scan(filesToScan);
+
+                try (final Writer xmlwriter = createXMLWriter(fs.workDir() + File.separator + "cflint-result.xml", StandardCharsets.UTF_8)) {
+                    lintResult.writeXml(xmlwriter);
+                }
+            } catch(CFLintScanException se) {
+                se.printStackTrace();
+            }catch(Exception ce) {
+                throw new IOException(ce);
+            } 
+            
+
+            // command.addArgument("-jar")
+            //     .addArgument(executableJar.getPath())
+            //     .addArgument("-xml")
+            //     // .addArgument("-folder")
+            //     // .addArgument(settings.get("sonar.projectBaseDir").orElseThrow(
+            //     //     IllegalStateException::new
+            //     // ))
+            //     .addArgument("-file")
+            //     .addArgument(fileArg)
+            //     .addArgument("-xmlfile")
+            //     .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
+            //     .addArgument("-configfile")
+            //     .addArgument(configFile.getPath())
+            //     .addArgument("-v");
+
+
+            // CommandExecutor executor = CommandExecutor.create();
+            // int exitCode = executor.execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
+
+            // if (exitCode != 0) {
+            //     throw new IllegalStateException("The CFLint analyzer failed with exit code: " + exitCode);
+            // }
+
+            
         } finally {
             //cleanup
             if(executableJar!= null && executableJar.exists()) {
@@ -111,6 +159,16 @@ public class CFLintAnalyzer {
         public void consumeLine(String line) {
             logger.error("Error consuming line {}", line);
         }
+    }
+
+    private Writer createXMLWriter(final String xmlOutFile, final Charset encoding) throws IOException {
+        final OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(xmlOutFile), encoding);
+        try {
+            out.append(String.format("<?xml version=\"1.0\" encoding=\"%s\" ?>%n", encoding));
+        } catch (final IOException e) {
+            throw new IOException(e);
+        }
+        return out;
     }
 
 }

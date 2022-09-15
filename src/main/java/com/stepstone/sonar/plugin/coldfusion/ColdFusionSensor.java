@@ -19,7 +19,8 @@ package com.stepstone.sonar.plugin.coldfusion;
 import com.google.common.base.Preconditions;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalyzer;
 import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintAnalysisResultImporter;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintJSONConfigExporter;
+
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
@@ -90,10 +91,10 @@ public class ColdFusionSensor implements Sensor {
     }
 
     private File generateCflintConfig() throws IOException, XMLStreamException {
-        final File configFile = new File(fs.workDir(), "cflint-config.xml");
+        final File configFile = new File(fs.workDir(), "cflint-config.json");
         Collection<String> ruleKeys = ruleProfile.findByRepository(ColdFusionPlugin.REPOSITORY_KEY)
             .stream().map(rule -> rule.ruleKey().toString()).collect(Collectors.toList());
-        new CFLintConfigExporter(ruleKeys).save(configFile);
+        new CFlintJSONConfigExporter(ruleKeys).save(configFile);
         return configFile;
     }
 
