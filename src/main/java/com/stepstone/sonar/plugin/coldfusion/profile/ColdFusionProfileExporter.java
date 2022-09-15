@@ -16,17 +16,19 @@ limitations under the License.
 
 package com.stepstone.sonar.plugin.coldfusion.profile;
 
-import com.google.common.base.Throwables;
-import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
-import com.stepstone.sonar.plugin.coldfusion.cflint.CFLintConfigExporter;
-import org.sonar.api.profiles.ProfileExporter;
-import org.sonar.api.profiles.RulesProfile;
-
-import javax.xml.stream.XMLStreamException;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import javax.xml.stream.XMLStreamException;
+
+import org.sonar.api.profiles.ProfileExporter;
+import org.sonar.api.profiles.RulesProfile;
+
+import com.google.common.base.Throwables;
+import com.stepstone.sonar.plugin.coldfusion.ColdFusionPlugin;
+import com.stepstone.sonar.plugin.coldfusion.cflint.CFlintJSONConfigExporter;
 
 public class ColdFusionProfileExporter extends ProfileExporter {
 
@@ -41,7 +43,7 @@ public class ColdFusionProfileExporter extends ProfileExporter {
             Collection<String> ruleKeys = ruleProfile.getActiveRulesByRepository(ColdFusionPlugin.REPOSITORY_KEY)
                 .stream().map(rule -> rule.getRule().ruleKey().rule())
                 .collect(Collectors.toList());
-            new CFLintConfigExporter(ruleKeys).save(writer);
+            new CFlintJSONConfigExporter(ruleKeys).save(writer);
         } catch (IOException | XMLStreamException e) {
             Throwables.propagate(e);
         }

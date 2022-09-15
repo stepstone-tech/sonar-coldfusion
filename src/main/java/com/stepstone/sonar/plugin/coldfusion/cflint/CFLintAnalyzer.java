@@ -63,71 +63,28 @@ public class CFLintAnalyzer {
     }
 
     public void analyze(File configFile) throws IOException, XMLStreamException {
-        File executableJar = null;
+        List<String> filesToScan = new ArrayList<>();
+
+        for (InputFile file : fs.inputFiles(fs.predicates().hasLanguage(ColdFusionPlugin.LANGUAGE_KEY)))
+            filesToScan.add(file.absolutePath());
+        
         try {
-            // Command command = Command.create(settings.get(ColdFusionPlugin.CFLINT_JAVA).orElseThrow(
-            //     IllegalStateException::new
-            // ));
-            // addCflintJavaOpts(command);
-            // executableJar = extractCflintJar();
+            ConfigBuilder cflintConfigBuilder = new ConfigBuilder(new CFLintPluginInfo());
+            cflintConfigBuilder.addCustomConfig(configFile.getPath());
 
-            List<String> filesToScan = new ArrayList<>();
+            CFLintAPI linter = new CFLintAPI(
+                cflintConfigBuilder.build()
+            );
+            linter.setVerbose(true);
 
-            for (InputFile file : fs.inputFiles(fs.predicates().hasLanguage(ColdFusionPlugin.LANGUAGE_KEY)))
-                filesToScan.add(file.absolutePath());
-            
-            try {
-                ConfigBuilder cflintConfigBuilder = new ConfigBuilder(new CFLintPluginInfo());
-                cflintConfigBuilder.addCustomConfig(configFile.getPath());
+            CFLintResult lintResult = linter.scan(filesToScan);
 
-                CFLintAPI linter = new CFLintAPI(
-                    cflintConfigBuilder.build()
-                );
-                linter.setVerbose(true);
-
-                CFLintResult lintResult = linter.scan(filesToScan);
-
-                try (final Writer xmlwriter = createXMLWriter(fs.workDir() + File.separator + "cflint-result.xml", StandardCharsets.UTF_8)) {
-                    lintResult.writeXml(xmlwriter);
-                }
-            } catch(CFLintScanException se) {
-                se.printStackTrace();
-            }catch(Exception ce) {
-                throw new IOException(ce);
-            } 
-            
-
-            // command.addArgument("-jar")
-            //     .addArgument(executableJar.getPath())
-            //     .addArgument("-xml")
-            //     // .addArgument("-folder")
-            //     // .addArgument(settings.get("sonar.projectBaseDir").orElseThrow(
-            //     //     IllegalStateException::new
-            //     // ))
-            //     .addArgument("-file")
-            //     .addArgument(fileArg)
-            //     .addArgument("-xmlfile")
-            //     .addArgument(fs.workDir() + File.separator + "cflint-result.xml")
-            //     .addArgument("-configfile")
-            //     .addArgument(configFile.getPath())
-            //     .addArgument("-v");
-
-
-            // CommandExecutor executor = CommandExecutor.create();
-            // int exitCode = executor.execute(command, new LogInfoStreamConsumer(), new LogErrorStreamConsumer(), Integer.MAX_VALUE);
-
-            // if (exitCode != 0) {
-            //     throw new IllegalStateException("The CFLint analyzer failed with exit code: " + exitCode);
-            // }
-
-            
-        } finally {
-            //cleanup
-            if(executableJar!= null && executableJar.exists()) {
-                executableJar.deleteOnExit();
+            try (final Writer xmlwriter = createXMLWriter(fs.workDir() + File.separator + "cflint-result.xml", StandardCharsets.UTF_8)) {
+                lintResult.writeXml(xmlwriter);
             }
+        } catch(Exception ce) {
+            throw new IOException(ce);
         }
-
     }
 
     protected File extractCflintJar() throws IOException {
@@ -141,23 +98,6 @@ public class CFLintAnalyzer {
             for (String argument : arguments) {
                 command.addArgument(argument);
             }
-        }
-    }
-
-    private class LogInfoStreamConsumer implements StreamConsumer {
-
-        @Override
-        public void consumeLine(String line) {
-            logger.info("Consuming line {}", line);
-        }
-
-    }
-
-    private class LogErrorStreamConsumer implements StreamConsumer {
-
-        @Override
-        public void consumeLine(String line) {
-            logger.error("Error consuming line {}", line);
         }
     }
 

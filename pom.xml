@@ -102,7 +102,6 @@
             <groupId>com.github.cflint</groupId>
             <artifactId>CFLint</artifactId>
             <version>${cflint.version}</version>
-            <classifier>all</classifier>
         </dependency>
     </dependencies>
 
@@ -120,32 +119,6 @@
                     <pluginSourcesUrl>https://github.com/stepstone-tech/sonar-coldfusion</pluginSourcesUrl>
                 </configuration>
             </plugin>
-            <!-- <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-dependency-plugin</artifactId>
-                <version>2.10</version>
-                <executions>
-                    <execution>
-                        <id>include-cflint</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>com.github.cflint</groupId>
-                                    <artifactId>CFLint</artifactId>
-                                    <version>${cflint.version}</version>
-                                    <classifier>all</classifier>
-                                    <destFileName>cflint.jar</destFileName>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.outputDirectory}/META-INF/runner</outputDirectory>
-                        </configuration>
-                    </execution>
-                </executions>
-            </plugin> -->
             <plugin>
                 <groupId>de.jutzig</groupId>
                 <artifactId>github-release-plugin</artifactId>
